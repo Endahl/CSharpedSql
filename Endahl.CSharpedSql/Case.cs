@@ -18,10 +18,16 @@
             Result = result;
         }
 
+        /// <summary>
+        /// Returns the <see cref="Case"/> as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
+        /// <summary>
+        /// Returns the <see cref="Case"/> as a string.
+        /// </summary>
         public override string ToString(SqlOptions sql)
         {
             var @case = $"CASE WHEN {Condition.ToString(sql)} THEN {sql.CreateItemID(Result)} ";

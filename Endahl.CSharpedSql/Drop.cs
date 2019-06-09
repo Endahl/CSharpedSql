@@ -14,11 +14,16 @@
             DropIfTableExists = ifTableExists;
         }
 
+        /// <summary>
+        /// Returns the <see cref="Drop"/> statement as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
-
+        /// <summary>
+        /// Returns the <see cref="Drop"/> statement as a string.
+        /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
             return DropIfTableExists ?

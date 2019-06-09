@@ -31,7 +31,6 @@
         public ColumnValue(string columnName, InsertFunction value) : this(columnName, value as object) { }
 
         public string ColumnName { get; }
-
         public object Value { get; }
     }
 }

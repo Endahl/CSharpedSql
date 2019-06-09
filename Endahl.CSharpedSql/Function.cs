@@ -89,10 +89,16 @@
             return this;
         }
 
+        /// <summary>
+        /// Returns the <see cref="Function"/> as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
+        /// <summary>
+        /// Returns the <see cref="Function"/> as a string.
+        /// </summary>
         public override string ToString(SqlOptions sql)
         {
             string result = "";
@@ -1076,6 +1082,9 @@
         #endregion
     }
 
+    /// <summary>
+    /// The supported functions
+    /// </summary>
     public enum FunctionType
     {
         Absolute,

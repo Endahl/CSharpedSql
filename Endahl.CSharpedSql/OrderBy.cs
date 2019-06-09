@@ -19,14 +19,14 @@
         }
 
         /// <summary>
-        /// Return the ORDER BY as a string
+        /// Return the <see cref="OrderBy"/> as a string.
         /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
         /// <summary>
-        /// Return the ORDER BY as a string
+        /// Return the <see cref="OrderBy"/> as a string.
         /// </summary>
         public string ToString(SqlOptions sql)
         {

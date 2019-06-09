@@ -11,6 +11,9 @@
 
         protected List<Where> wheres;
 
+        /// <summary>
+        /// Gets the <see cref="CSharpedSql.Condition"/> for this <see cref="Where"/>
+        /// </summary>
         public virtual Condition Condition { get; }
 
         protected Where(Condition condition)
@@ -41,7 +44,7 @@
         }
 
         /// <summary>
-        /// Return the WHERE Clause as a string
+        /// Return the <see cref="Where"/> clause as a string.
         /// </summary>
         public override string ToString()
         {
@@ -49,7 +52,7 @@
         }
 
         /// <summary>
-        /// Return the WHERE Clause as a string
+        /// Return the <see cref="Where"/> clause as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {

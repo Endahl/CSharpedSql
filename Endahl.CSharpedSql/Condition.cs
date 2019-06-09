@@ -54,11 +54,16 @@
             Item2 = item2;
         }
 
+        /// <summary>
+        /// Returns the <see cref="Condition"/> as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
-
+        /// <summary>
+        /// Returns the <see cref="Condition"/> as a string.
+        /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
             switch (ConditionType)

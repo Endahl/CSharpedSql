@@ -38,14 +38,14 @@
         }
 
         /// <summary>
-        /// Return the HAVING Clause as a string
+        /// Return the <see cref="Having"/> clause as a string.
         /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
         /// <summary>
-        /// Return the HAVING Clause as a string
+        /// Return the <see cref="Having"/> clause as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {

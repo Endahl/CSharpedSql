@@ -1,5 +1,8 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    /// <summary>
+    /// A ALTER statement for SQL.
+    /// </summary>
     public class Alter: ISqlStatement
     {
         public virtual string ConstraintName { get; }
@@ -31,20 +34,17 @@
             Table = table;
             WhatToModify = whatToAlter;
         }
-
         protected Alter(AlterType alter, string constraintName, string table, WhatToAlter whatToAlter, string column, string[] primaryKeyColumns):
             this(alter, constraintName, table, whatToAlter, column)
         {
             ExtraPrimaryKeyColumns = primaryKeyColumns;
         }
-
         protected Alter(AlterType alter, string name, string table, WhatToAlter whatToAlter, string column, string referencesTable, string referencesColumn):
             this(alter, name, table, whatToAlter, column)
         {
             ReferencesColumn = referencesColumn;
             ReferencesTable = referencesTable;
         }
-
         protected Alter(AlterType alter, string table, WhatToAlter whatToAlter, NewColumn newColumnToAdd)
         {
             NewColumnToAdd = newColumnToAdd;
@@ -52,7 +52,6 @@
             Table = table;
             WhatToModify = whatToAlter;
         }
-
         protected Alter(AlterType alter, string table, WhatToAlter whatToAlter, string column, CSharpType dataType, int size, int digits)
         {
             DataTypeToAlter = dataType;
@@ -64,11 +63,16 @@
             DataTypeSizeToAlter = size;
         }
 
+        /// <summary>
+        /// Returns the <see cref="Alter"/> statement as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
-
+        /// <summary>
+        /// Returns the <see cref="Alter"/> statement as a string.
+        /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
             var statement = $"ALTER TABLE {sql.IdentifieName(Table)} ";
@@ -114,6 +118,7 @@
 
             return statement;
         }
+
 
         public static Alter AddColumn(string table, NewColumn column)
         {

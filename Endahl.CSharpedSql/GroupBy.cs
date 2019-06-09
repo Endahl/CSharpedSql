@@ -14,10 +14,16 @@
             ColumnNames = arr;
         }
 
+        /// <summary>
+        /// Returns the <see cref="GroupBy"/> as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
+        /// <summary>
+        /// Returns the <see cref="GroupBy"/> as a string.
+        /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
             var result = $"GROUP BY {sql.IdentifieName(ColumnNames[0])}";

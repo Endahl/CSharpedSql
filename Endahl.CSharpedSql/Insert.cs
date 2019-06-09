@@ -16,14 +16,14 @@
         }
 
         /// <summary>
-        /// Return the INSERT as a string
+        /// Return the <see cref="Insert"/> statement as a string.
         /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
         /// <summary>
-        /// Return the INSERT as a string
+        /// Return the <see cref="Insert"/> statement as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {

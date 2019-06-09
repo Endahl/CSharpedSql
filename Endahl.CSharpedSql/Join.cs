@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// Return the JOIN clause as a string. the string will be missing a table name
+        /// Return the <see cref="Join"/> clause as a string. the string will be missing a table name.
         /// </summary>
         public override string ToString()
         {
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// Return the WHERE Clause as a string
+        /// Return the <see cref="Join"/> clause as a string
         /// </summary>
         public virtual string ToString(string table1, SqlOptions sql)
         {

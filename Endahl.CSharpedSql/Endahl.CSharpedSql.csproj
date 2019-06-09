@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Authors>Anders Endahl</Authors>
+    <Product>CSharped Sql</Product>
   </PropertyGroup>
 
 </Project>

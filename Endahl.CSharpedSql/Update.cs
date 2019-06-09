@@ -16,15 +16,14 @@
         }
 
         /// <summary>
-        /// Return the UPDATE statement as a string.
+        /// Return the <see cref="Update"/> statement as a string.
         /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
-
         /// <summary>
-        /// Return the UPDATE statement as a string.
+        /// Return the <see cref="Update"/> statement as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {

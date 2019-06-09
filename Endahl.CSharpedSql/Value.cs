@@ -29,12 +29,21 @@
         public Value(ulong value, string asName) : this(value as object, asName) { }
         public Value(ushort value, string asName) : this(value as object, asName) { }
 
+        /// <summary>
+        /// Gets the value from this <see cref="Value"/>
+        /// </summary>
         public object Object { get; }
 
+        /// <summary>
+        /// Returns the <see cref="Value"/> as a string.
+        /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
+        /// <summary>
+        /// Returns the <see cref="Value"/> as a string.
+        /// </summary>
         public override string ToString(SqlOptions sql)
         {
             return sql.CreateItemID(Object);

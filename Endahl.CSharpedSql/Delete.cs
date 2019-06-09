@@ -14,7 +14,7 @@
         }
 
         /// <summary>
-        /// Return the DELETE statment as a string
+        /// Return the <see cref="Delete"/> statment as a string.
         /// </summary>
         public override string ToString()
         {
@@ -22,7 +22,7 @@
         }
 
         /// <summary>
-        /// Return the DELETE statment as a string
+        /// Return the <see cref="Delete"/> statment as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {

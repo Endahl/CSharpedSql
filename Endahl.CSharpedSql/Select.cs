@@ -1,19 +1,51 @@
 ﻿namespace Endahl.CSharpedSql
 {
     /// <summary>
-    /// A SELECT statement in SQL
+    /// A SELECT statement for SQL.
     /// </summary>
     public class Select: ISqlStatement
     {
+        /// <summary>
+        /// The limit of rows to find. Is only sets then the method <see cref="Select"/>.TopFrom() is called.
+        /// </summary>
         protected int top = 0;
 
+        /// <summary>
+        /// Gets the name of the table that this <see cref="Select"/> is selecting from.
+        /// </summary>
         public virtual string TableName { get; }
+        /// <summary>
+        /// Gets the columns, cases, values or functions that this <see cref="Select"/> is selecting.
+        /// </summary>
         public virtual ColumnItem[] Columns { get; }
+        /// <summary>
+        /// Gets the type this <see cref="Select"/> is.
+        /// </summary>
         public virtual SelectType SelectType { get; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Join"/> for this <see cref="Select"/>.
+        /// Can be null.
+        /// </summary>
         public virtual Join Join { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Where"/> for this <see cref="Select"/>.
+        /// Can be null.
+        /// </summary>
         public virtual Where Where { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Having"/> for this <see cref="Select"/>.
+        /// Can be null.
+        /// </summary>
         public virtual Having Having { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.OrderBy"/> for this <see cref="Select"/>.
+        /// Can be null.
+        /// </summary>
         public virtual OrderBy OrderBy { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.GroupBy"/> for this <see cref="Select"/>.
+        /// Can be null.
+        /// </summary>
         public virtual GroupBy GroupBy { get; set; }
 
         protected Select(string table, SelectType selectType, params ColumnItem[] columns)
@@ -24,14 +56,14 @@
         }
 
         /// <summary>
-        /// Returns the SELECT statement as a string
+        /// Returns the <see cref="Select"/> statement as a string.
         /// </summary>
         public override string ToString()
         {
             return ToString(new SqlOptions());
         }
         /// <summary>
-        /// Returns the SELECT statement as a string
+        /// Returns the <see cref="Select"/> statement as a string.
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
@@ -138,7 +170,7 @@
         }
         /// <summary>
         /// The SELECT TOP clause is used to specify the number of records to return.
-        /// <para>In MySql this is the same as LIMIT</para>
+        /// <para>In MySql this is the same as LIMIT.</para>
         /// </summary>
         /// <param name="top">the max number to return</param>
         /// <param name="table">the table to select from</param>
