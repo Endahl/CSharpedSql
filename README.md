@@ -1,6 +1,6 @@
 # CSharpedSql
 CSharped Sql allow you to easily change between Sql Server and MySql, and vice versa,
-by using using classes and methods, instead of writing long and poorly maintainable sql strings.
+by using classes and methods, instead of writing long and poorly maintainable sql strings.
 The idea for this project came from the fear of having to rewrite all classes that use sql commands,
 when moving from a MySql database to a Sql Server database or vice versa.
 
