@@ -101,11 +101,20 @@
                     data = SqlLanguage == SqlLanguage.SqlServer ? "nchar(1)" : "CHAR(1)";
                     break;
                 case CSharpType.String:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "nvarchar" : "VARCHAR";
-                    if (size > 0 || size <= 4000)
-                        data += $"({size})";
+                    if (SqlLanguage == SqlLanguage.SqlServer)
+                    {
+                        data = "nvarchar";
+                        data += size > 0 && size <= 4000 ? $"({size})" : "(max)";
+                    }
                     else
-                        data += SqlLanguage == SqlLanguage.SqlServer ? "(max)" : "(65535)";
+                    {
+                        if (size == 0)
+                            size = 20000;
+                        if (size > 20000)
+                            data = "TEXT";
+                        else
+                            data = $"VARCHAR({size})";
+                    }
                     break;
                 case CSharpType.Bool:
                     data = SqlLanguage == SqlLanguage.SqlServer ? "bit(1)" : "BIT(1)";

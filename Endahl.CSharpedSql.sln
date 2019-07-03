@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29001.49
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endahl.CSharpedSql", "Endahl.CSharpedSql\Endahl.CSharpedSql.csproj", "{9DE96A95-3945-4A24-A54E-734B82E468E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSql", "Endahl.CSharpedSql\Endahl.CSharpedSql.csproj", "{9DE96A95-3945-4A24-A54E-734B82E468E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endahl.CSharpedSql.Connect", "Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.Connect.csproj", "{C647E686-5D28-418B-94AF-BD57F5DB2B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSql.Connect", "Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.Connect.csproj", "{C647E686-5D28-418B-94AF-BD57F5DB2B86}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSqlTests", "Endahl.CSharpedSqlTests\Endahl.CSharpedSqlTests.csproj", "{47915724-8471-428F-BF30-ADE9DE69C5E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C647E686-5D28-418B-94AF-BD57F5DB2B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C647E686-5D28-418B-94AF-BD57F5DB2B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C647E686-5D28-418B-94AF-BD57F5DB2B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47915724-8471-428F-BF30-ADE9DE69C5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47915724-8471-428F-BF30-ADE9DE69C5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47915724-8471-428F-BF30-ADE9DE69C5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47915724-8471-428F-BF30-ADE9DE69C5E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

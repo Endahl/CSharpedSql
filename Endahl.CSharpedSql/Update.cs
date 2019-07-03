@@ -32,7 +32,7 @@
             foreach (var item in ColumnValues)
                 statement += $", {sql.IdentifieName(item.ColumnName)} = {sql.CreateItemID(item.Value)}";
             if (Where != null)
-                statement += Where.ToString(sql);
+                statement += " " + Where.ToString(sql);
             return statement;
         }
 

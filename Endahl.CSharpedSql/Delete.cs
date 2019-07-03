@@ -28,7 +28,7 @@
         {
             var statement = $"DELETE FROM {sql.IdentifieName(TableName)}";
             if (Where != null)
-                statement += $"{Where.ToString(sql)}";
+                statement += $" {Where.ToString(sql)}";
             return statement;
         }
 
