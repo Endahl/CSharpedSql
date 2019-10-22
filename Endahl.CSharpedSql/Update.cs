@@ -42,7 +42,10 @@
         /// <param name="where">the WHERE Clause to add</param>
         public static Update operator +(Update update, Where where)
         {
-            update.Where = where;
+            if (update.Where == null)
+                update.Where = where;
+            else
+                update.Where.And(where);
             return update;
         }
 

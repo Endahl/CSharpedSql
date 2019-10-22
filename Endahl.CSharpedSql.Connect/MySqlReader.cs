@@ -43,12 +43,12 @@ namespace Endahl.CSharpedSql.MySql
 
         public bool GetBool(int index)
         {
-            return (byte)reader[index] == 1;
+            return (ulong)reader[index] == 1;
         }
 
         public bool GetBool(string name)
         {
-            return (byte)reader[name] == 1;
+            return (ulong)reader[name] == 1;
         }
 
         public byte GetByte(int index)

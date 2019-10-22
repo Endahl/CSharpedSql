@@ -114,13 +114,19 @@
         /// <param name="where">the WHERE Clause to add</param>
         public static Select operator +(Select select, Where where)
         {
-            select.Where = where;
+            if (select.Where == null)
+                select.Where = where;
+            else
+                select.Where.And(where);
             return select;
         }
 
         public static Select operator +(Select select, Having having)
         {
-            select.Having = having;
+            if (select.Having == null)
+                select.Having = having;
+            else
+                select.Having.And(having);
             return select;
         }
 
