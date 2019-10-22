@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Endahl.CSharpedSql.Connect</name>
+    </assembly>
+    <members>
+        <member name="F:Endahl.CSharpedSql.MySql.MySqlConnect.openConnection">
+            <summary>
+            Gets or sets a indication of whether the connection to a database is open.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.SqlOptions">
+            <summary>
+            Get the options for this <see cref="T:Endahl.CSharpedSql.MySql.MySqlConnect"/> instance.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.IsConnectionOpen">
+            <summary>
+            Gets a indication of whether the connection to a MySql database is open.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.ConnectionString">
+            <summary>
+            Gets the string used to connect to a MySql database.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.SetConnection(System.String,System.String,System.String,System.String)">
+            <summary>
+            Sets the string used to connect to a database.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.Execute">
+            <summary>
+            Executes a parameterized SQL statement and returns the number of rows affected.
+            </summary>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.ExecuteReader">
+            <summary>
+            Executes a parameterized SQL statement and builds a <see cref="T:Endahl.CSharpedSql.ISqlDataReader"/>
+            </summary>
+            <returns>A <see cref="T:Endahl.CSharpedSql.ISqlDataReader"/> object</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.ExecuteScalar">
+            <summary>
+            Executes a parameterized SQL statement, and returns the first column of the first row in the result
+            set returned by the query. Extra columns or rows are ignored.
+            </summary>
+            <returns>The first column of the first row in the result set, or a null reference if the result set is empty</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.OpenConnection">
+            <summary>
+             Opens a database connection with the property settings specified by the ConnectionString.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.CloseConnection">
+            <summary>
+            Closes the connection to the database. This is the preferred method of closing
+            any open connection.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.Clear">
+            <summary>
+            Remove all quries from this <see cref="T:Endahl.CSharpedSql.MySql.MySqlConnect"/> instance.
+            </summary>
+        </member>
+        <member name="T:Endahl.CSharpedSql.MySql.MySqlReader">
+            <summary>
+            Provides a way of reading a forward-only stream of rows from a MySql database.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlReader.FieldCount">
+            <summary>
+            Gets the number of columns in the current row.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlReader.HasRows">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Endahl.CSharpedSql.MySql.MySqlReader"/> contains one or more rows.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlReader.IsClosed">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Endahl.CSharpedSql.MySql.MySqlReader"/> is closed.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlReader.RecordsAffected">
+            <summary>
+            Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlReader.Close">
+            <summary>
+            Closes the <see cref="T:Endahl.CSharpedSql.MySql.MySqlReader"/> object.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlReader.NextResult">
+            <summary>
+            Advances the <see cref="T:Endahl.CSharpedSql.MySql.MySqlReader"/> to the next result, when reading the results of batch
+            SQL statements.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.MySqlReader.Read">
+            <summary>
+            Advances the <see cref="T:Endahl.CSharpedSql.MySql.MySqlReader"/> to the next record.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Endahl.CSharpedSql.SqlServer.SqlServerReader">
+            <summary>
+            Provides a way of reading a forward-only stream of rows from a Sql Server database.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerReader.FieldCount">
+            <summary>
+            Gets the number of columns in the current row.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerReader.HasRows">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerReader"/> contains one or more rows.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerReader.IsClosed">
+            <summary>
+            Gets a value indicating whether the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerReader"/> is closed.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerReader.RecordsAffected">
+            <summary>
+            Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerReader.Close">
+            <summary>
+            Closes the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerReader"/> object.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerReader.NextResult">
+            <summary>
+            Advances the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerReader"/> to the next result, when reading the results of batch
+            SQL statements.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerReader.Read">
+            <summary>
+            Advances the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerReader"/> to the next record.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:Endahl.CSharpedSql.SqlServer.SqlServerConnect.openConnection">
+            <summary>
+            Gets or sets a indication of whether the connection to a database is open.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.SqlOptions">
+            <summary>
+            Get the options for this <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerConnect"/> instance.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.IsConnectionOpen">
+            <summary>
+            Gets a indication of whether the connection to a Sql Server database is open.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.ConnectionString">
+            <summary>
+            Gets the string used to connect to a Sql Server database.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.SetConnection(System.String,System.String,System.String,System.String)">
+            <summary>
+            Sets the string used to connect to a database.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.Execute">
+            <summary>
+            Executes a parameterized SQL statement and returns the number of rows affected.
+            </summary>
+            <returns>Number of rows affected</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.ExecuteReader">
+            <summary>
+            Executes a parameterized SQL statement and builds a <see cref="T:Endahl.CSharpedSql.ISqlDataReader"/>
+            </summary>
+            <returns>A <see cref="T:Endahl.CSharpedSql.ISqlDataReader"/> object</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.ExecuteScalar">
+            <summary>
+            Executes a parameterized SQL statement, and returns the first column of the first row in the result
+            set returned by the query. Extra columns or rows are ignored.
+            </summary>
+            <returns>The first column of the first row in the result set, or a null reference if the result set is empty</returns>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.OpenConnection">
+            <summary>
+             Opens a database connection with the property settings specified by the ConnectionString.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.CloseConnection">
+            <summary>
+            Closes the connection to the database. This is the preferred method of closing
+            any open connection.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.Clear">
+            <summary>
+            Remove all quries from this <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerConnect"/> instance.
+            </summary>
+        </member>
+    </members>
+</doc>

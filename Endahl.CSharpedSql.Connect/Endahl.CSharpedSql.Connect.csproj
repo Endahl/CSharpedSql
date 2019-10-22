@@ -6,6 +6,10 @@
     <Product>CSharped Sql Connect</Product>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Visual Studio\Endahl.CSharpedSql\Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.Connect.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.16" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />

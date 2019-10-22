@@ -6,4 +6,8 @@
     <Product>CSharped Sql</Product>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Visual Studio\Endahl.CSharpedSql\Endahl.CSharpedSql\Endahl.CSharpedSql.xml</DocumentationFile>
+  </PropertyGroup>
+
 </Project>
