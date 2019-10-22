@@ -27,7 +27,12 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var statement = $"DELETE FROM {sql.IdentifieName(TableName)}";
+            var statement = "DELETE ";
+            if (Join != null)
+                statement += $"{TableName} ";
+
+            statement += $"FROM {sql.IdentifieName(TableName)}";
+
             if (Join != null)
                 statement += $" {Join.ToString(TableName, sql)}";
             if (Where != null)
