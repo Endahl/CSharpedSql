@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     public class Column
     {
         public CSharpType DataType { get; }

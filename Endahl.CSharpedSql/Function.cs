@@ -1,5 +1,6 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
     using System;
 
     /// <summary>
@@ -1080,64 +1081,5 @@
             return new Function(FunctionType.NullIf, columnName, expression);
         }
         #endregion
-    }
-
-    /// <summary>
-    /// The supported functions
-    /// </summary>
-    public enum FunctionType
-    {
-        Absolute,
-        ArcCos,
-        Ascii,
-        ArcSin,
-        ArcTan,
-        Average,
-        Ceiling,
-        Count,
-        Cos,
-        Cot,
-        DateDifference,
-        DateDifferenceColumn,
-        Degrees,
-        Exp,
-        Floor,
-        GetDate,
-        GetDay,
-        GetMonth,
-        GetYear,
-        IndexOf,
-        Insert,
-        IsNull,
-        Left,
-        LeftTrim,
-        Length,
-        Locate,
-        Log,
-        Log10,
-        NewGuid,
-        NullIf,
-        Max,
-        Min,
-        Pi,
-        Power,
-        Radians,
-        Random,
-        Repeat,
-        Replace,
-        Reverse,
-        Right,
-        RightTrim,
-        Round,
-        Sign,
-        Sin,
-        Space,
-        SquareRoot,
-        SubString,
-        Sum,
-        Tan,
-        ToLower,
-        ToUpper,
-        Trim,
     }
 }

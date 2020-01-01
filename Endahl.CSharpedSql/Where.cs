@@ -1,5 +1,6 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
 
     /// <summary>
@@ -28,6 +29,8 @@
         /// <param name="where">The WHERE Clause to add</param>
         public virtual Where And(Where where)
         {
+            if (where == null)
+                throw new System.ArgumentNullException();
             wheres.Add(where);
             return this;
         }
@@ -38,6 +41,8 @@
         /// <param name="where">The WHERE Clause to add</param>
         public virtual Where Or(Where where)
         {
+            if (where == null)
+                throw new System.ArgumentNullException();
             where.and = false;
             wheres.Add(where);
             return this;

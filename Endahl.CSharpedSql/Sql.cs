@@ -1,5 +1,6 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
 
     /// <summary>

@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A SELECT statement for SQL.
     /// </summary>
@@ -23,15 +25,15 @@
         /// </summary>
         public virtual SelectType SelectType { get; }
         /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Where"/> for this statement.
+        /// Can be null.
+        /// </summary>
+        public virtual Where Where { get; set; }
+        /// <summary>
         /// Gets or sets the <see cref="CSharpedSql.Join"/> for this <see cref="Select"/>.
         /// Can be null.
         /// </summary>
         public virtual Join Join { get; set; }
-        /// <summary>
-        /// Gets or sets the <see cref="CSharpedSql.Where"/> for this <see cref="Select"/>.
-        /// Can be null.
-        /// </summary>
-        public virtual Where Where { get; set; }
         /// <summary>
         /// Gets or sets the <see cref="CSharpedSql.Having"/> for this <see cref="Select"/>.
         /// Can be null.
@@ -112,22 +114,62 @@
         /// The WHERE clause is used to filter records.
         /// </summary>
         /// <param name="where">the WHERE Clause to add</param>
-        public static Select operator +(Select select, Where where)
+        public static Select operator +(Select statement, Where where)
         {
-            if (select.Where == null)
-                select.Where = where;
+            if (statement.Where == null)
+                statement.Where = where;
             else
-                select.Where.And(where);
-            return select;
+                statement.Where.And(where);
+            return statement;
+        }
+        /// <summary>
+        /// Add a another condition to the WHERE Clause that need to be true.
+        /// </summary>
+        /// <param name="where">The WHERE Clause to add</param>
+        public static Select operator &(Select statement, Where where)
+        {
+            if (statement.Where == null)
+                statement.Where = where;
+            else
+                statement.Where.And(where);
+            return statement;
+        }
+        /// <summary>
+        /// Add a another condition to the WHERE Clause that can be true instead.
+        /// </summary>
+        /// <param name="where">The WHERE Clause to add</param>
+        public static Select operator |(Select statement, Where where)
+        {
+            if (statement.Where == null)
+                throw new System.Exception("Can't use '|' then the statements 'Where' is null, use '+' or '&' insted!");
+            else
+                statement.Where.Or(where);
+            return statement;
         }
 
-        public static Select operator +(Select select, Having having)
+        public static Select operator +(Select statement, Having having)
         {
-            if (select.Having == null)
-                select.Having = having;
+            if (statement.Having == null)
+                statement.Having = having;
             else
-                select.Having.And(having);
-            return select;
+                statement.Having.And(having);
+            return statement;
+        }
+        public static Select operator &(Select statement, Having having)
+        {
+            if (statement.Having == null)
+                statement.Having = having;
+            else
+                statement.Having.And(having);
+            return statement;
+        }
+        public static Select operator |(Select statement, Having having)
+        {
+            if (statement.Having == null)
+                throw new System.Exception("Can't use '|' then the statements 'Where' is null, use '+' or '&' insted!");
+            else
+                statement.Having.Or(having);
+            return statement;
         }
 
         public static Select operator +(Select select, GroupBy groupBy)
@@ -188,12 +230,5 @@
                 top = top
             };
         }
-    }
-
-    public enum SelectType
-    {
-        Normal,
-        Distinct,
-        Top
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A DROP statement in SQL
     /// </summary>

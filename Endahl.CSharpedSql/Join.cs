@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// JOIN clause in SQL
     /// </summary>
@@ -90,13 +92,5 @@
         {
             return new Join(JoinType.FullOuter, table2, columnFrom, column);
         }
-    }
-
-    public enum JoinType
-    {
-        Inner,
-        Left,
-        Right,
-        FullOuter
     }
 }

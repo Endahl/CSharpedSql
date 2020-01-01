@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A ALTER statement for SQL.
     /// </summary>
@@ -164,12 +166,5 @@
         {
             return new Alter(AlterType.Drop, $"uc_{table}_{column}", table, WhatToAlter.Unique, column);
         }
-    }
-
-    public enum AlterType
-    {
-        Add,
-        Drop,
-        Alter
     }
 }

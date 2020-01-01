@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A INSERT statement in SQL
     /// </summary>

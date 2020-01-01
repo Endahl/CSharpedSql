@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql.MySql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// The base class for MySql
     /// </summary>

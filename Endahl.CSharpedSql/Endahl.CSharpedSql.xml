@@ -14,9 +14,156 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Alter"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Alter.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Alter.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Alter"/> statement as a string.
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.Equal">
+            <summary>
+            =
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.NotEqual">
+            <summary>
+            !=
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.GreaterThan">
+            <summary>
+            &gt;
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.LessThan">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.IsNull">
+            <summary>
+            = null
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.ConditionType.IsNotNull">
+            <summary>
+            != null
+            </summary>
+        </member>
+        <member name="T:Endahl.CSharpedSql.Base.FunctionType">
+            <summary>
+            The supported functions
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.ISqlStatement.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
+            <summary>
+            Returns the statement as a string.
+            </summary>
+        </member>
+        <member name="T:Endahl.CSharpedSql.Base.SqlOptions">
+            <summary>
+            Options and functions used when generating sql commands.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.SqlItems">
+            <summary>
+            Contains all values from all queries that are added to the <see cref="T:Endahl.CSharpedSql.Sql"/> instance that this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/> is part of.
+            <para>If this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/>.UseParameters is false, when this list is null.</para>
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.ItemIdCount">
+            <summary>
+            A count of how many value that has been added by the CreateItemID methods.
+            <para>If this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/>.UseParameters is false, when the count will be 0.</para>
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.IdentifierLeft">
+            <summary>
+            Get the left char used to enclose a table or column name with.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.IdentifierRight">
+            <summary>
+            Get the right char used to enclose a table or column name with.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.SqlLanguage">
+            <summary>
+            Get the type of Sql to be generated.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.UseParameters">
+            <summary>
+            Get an indication of whether all values will be parameterized.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.#ctor(System.Char,System.Char,System.Boolean)">
+            <param name="identifierLeft">The left char to enclose a table or column name with.</param>
+            <param name="identifierRight">The right char to enclose a table or column name with.</param>
+            <param name="useParameters">Should all value be parameterized.</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.#ctor(System.Char,System.Char,Endahl.CSharpedSql.Base.SqlLanguage,System.Boolean)">
+            <param name="identifierLeft">The left char to enclose a table or column name with.</param>
+            <param name="identifierRight">The right char to enclose a table or column name with.</param>
+            <param name="sqlLanguage">The type of Sql to be generated.</param>
+            <param name="useParameters">Should all value be parameterized.</param>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.GetSqlItems">
+            <summary>
+            Get all values from all queries that are added to the <see cref="T:Endahl.CSharpedSql.Sql"/> instance that this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/> is part of.
+            <para>If this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/>.UseParameters is false, when this will returns null.</para>
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.ClearItems">
+            <summary>
+            Remove all items that has been added to this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/>.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.IdentifieName(System.String)">
+            <summary>
+            Returns a enclosed table or column name.
+            </summary>
+            <param name="value">The table or column name to enclose.</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.SafeIdentifieName(System.String)">
+            <summary>
+            Returns a safe enclosed table or column name.
+            </summary>
+            <param name="value">The table or column name to enclose.</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.CSharpTypeToSqlDataType(Endahl.CSharpedSql.CSharpType,System.Int32,System.Int32)">
+            <summary>
+            Returns the sql type that is equal to the <see cref="T:Endahl.CSharpedSql.CSharpType"/>, used then altering or creating columns.
+            </summary>
+            <param name="type">The C# type.</param>
+            <param name="size">The size the sql type should have. Will be ignored if the <see cref="T:Endahl.CSharpedSql.CSharpType"/> don't support it.</param>
+            <param name="digits">Only used when the <see cref="T:Endahl.CSharpedSql.CSharpType"/> is Decimal</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.CreateItemID(System.Object)">
+            <summary>
+            Add a value that should be parameterized, and returns a id.
+            If this <see cref="T:Endahl.CSharpedSql.Base.SqlOptions"/>.UseParameters is false, when the value will be returned as a string.
+            </summary>
+            <param name="value">The value to be added.</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.HandleObject(System.Object)">
+            <summary>
+            Returns a object that is ready for a sql query.
+            </summary>
+            <param name="obj">The object that should be made ready a sql query.</param>
+        </member>
+        <member name="T:Endahl.CSharpedSql.Base.SqlLanguage">
+            <summary>
+            The supported Sql languages
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.SqlLanguage.SqlServer">
+            <summary>
+            Microsoft Sql Server, also known as MS Sql
+            </summary>
+        </member>
+        <member name="F:Endahl.CSharpedSql.Base.SqlLanguage.MySql">
+            <summary>
+            Oracle's MySql
             </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.Case.ToString">
@@ -24,7 +171,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Case"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Case.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Case.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Case"/> as a string.
             </summary>
@@ -34,7 +181,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Column"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Column.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Column.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Column"/> as a string.
             </summary>
@@ -55,7 +202,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.ColumnItem"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.ColumnItem.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.ColumnItem.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.ColumnItem"/> as a string.
             </summary>
@@ -65,39 +212,9 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Condition"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Condition.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Condition.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Condition"/> as a string.
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.Equal">
-            <summary>
-            =
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.NotEqual">
-            <summary>
-            !=
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.GreaterThan">
-            <summary>
-            &gt;
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.LessThan">
-            <summary>
-            &lt;
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.IsNull">
-            <summary>
-            = null
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.ConditionType.IsNotNull">
-            <summary>
-            != null
             </summary>
         </member>
         <member name="T:Endahl.CSharpedSql.Create">
@@ -115,7 +232,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Create"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Create.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Create.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Create"/> statement as a string.
             </summary>
@@ -144,12 +261,29 @@
             A DELETE statement in SQL
             </summary>
         </member>
+        <member name="P:Endahl.CSharpedSql.Delete.TableName">
+            <summary>
+            Gets the name of the table that this <see cref="T:Endahl.CSharpedSql.Delete"/> is selecting from.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Delete.Where">
+            <summary>
+            Gets or sets the <see cref="T:Endahl.CSharpedSql.Where"/> for this statement.
+            Can be null.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Delete.Join">
+            <summary>
+            Gets or sets the <see cref="T:Endahl.CSharpedSql.Join"/> for this <see cref="T:Endahl.CSharpedSql.Delete"/>.
+            Can be null.
+            </summary>
+        </member>
         <member name="M:Endahl.CSharpedSql.Delete.ToString">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Delete"/> statment as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Delete.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Delete.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Delete"/> statment as a string.
             </summary>
@@ -159,6 +293,18 @@
             The WHERE clause is used to filter records.
             </summary>
             <param name="where">the WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Delete.op_BitwiseAnd(Endahl.CSharpedSql.Delete,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that need to be true.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Delete.op_BitwiseOr(Endahl.CSharpedSql.Delete,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that can be true instead.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
         </member>
         <member name="M:Endahl.CSharpedSql.Delete.op_Addition(Endahl.CSharpedSql.Delete,Endahl.CSharpedSql.Join)">
             <summary>
@@ -184,7 +330,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Drop"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Drop.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Drop.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Drop"/> statement as a string.
             </summary>
@@ -220,7 +366,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Function"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Function.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Function.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Function"/> as a string.
             </summary>
@@ -677,17 +823,12 @@
             Compares two expressions and returns NULL if they are equal. Otherwise, the first expression is returned
             </summary>
         </member>
-        <member name="T:Endahl.CSharpedSql.FunctionType">
-            <summary>
-            The supported functions
-            </summary>
-        </member>
         <member name="M:Endahl.CSharpedSql.GroupBy.ToString">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.GroupBy"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.GroupBy.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.GroupBy.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.GroupBy"/> as a string.
             </summary>
@@ -709,7 +850,7 @@
             Return the <see cref="T:Endahl.CSharpedSql.Having"/> clause as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Having.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Having.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Having"/> clause as a string.
             </summary>
@@ -836,7 +977,7 @@
             Return the <see cref="T:Endahl.CSharpedSql.Insert"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Insert.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Insert.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Insert"/> statement as a string.
             </summary>
@@ -853,7 +994,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.InsertFunction"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.InsertFunction.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.InsertFunction.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.InsertFunction"/> as a string.
             </summary>
@@ -1102,11 +1243,6 @@
             Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.ISqlStatement.ToString(Endahl.CSharpedSql.SqlOptions)">
-            <summary>
-            Returns the statement as a string.
-            </summary>
-        </member>
         <member name="T:Endahl.CSharpedSql.Join">
             <summary>
             JOIN clause in SQL
@@ -1117,7 +1253,7 @@
             Return the <see cref="T:Endahl.CSharpedSql.Join"/> clause as a string. the string will be missing a table name.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.ToString(System.String,Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Join.ToString(System.String,Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Join"/> clause as a string
             </summary>
@@ -1174,7 +1310,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.NewColumn"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.NewColumn.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.NewColumn.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.NewColumn"/> as a string.
             </summary>
@@ -1189,7 +1325,7 @@
             Return the <see cref="T:Endahl.CSharpedSql.OrderBy"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.OrderBy.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.OrderBy.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.OrderBy"/> as a string.
             </summary>
@@ -1231,15 +1367,15 @@
             Gets the type this <see cref="T:Endahl.CSharpedSql.Select"/> is.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.Select.Join">
+        <member name="P:Endahl.CSharpedSql.Select.Where">
             <summary>
-            Gets or sets the <see cref="T:Endahl.CSharpedSql.Join"/> for this <see cref="T:Endahl.CSharpedSql.Select"/>.
+            Gets or sets the <see cref="T:Endahl.CSharpedSql.Where"/> for this statement.
             Can be null.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.Select.Where">
+        <member name="P:Endahl.CSharpedSql.Select.Join">
             <summary>
-            Gets or sets the <see cref="T:Endahl.CSharpedSql.Where"/> for this <see cref="T:Endahl.CSharpedSql.Select"/>.
+            Gets or sets the <see cref="T:Endahl.CSharpedSql.Join"/> for this <see cref="T:Endahl.CSharpedSql.Select"/>.
             Can be null.
             </summary>
         </member>
@@ -1266,7 +1402,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Select"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Select.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Select.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Select"/> statement as a string.
             </summary>
@@ -1276,6 +1412,18 @@
             The WHERE clause is used to filter records.
             </summary>
             <param name="where">the WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Select.op_BitwiseAnd(Endahl.CSharpedSql.Select,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that need to be true.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Select.op_BitwiseOr(Endahl.CSharpedSql.Select,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that can be true instead.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
         </member>
         <member name="M:Endahl.CSharpedSql.Select.op_Addition(Endahl.CSharpedSql.Select,Endahl.CSharpedSql.OrderBy)">
             <summary>
@@ -1456,113 +1604,6 @@
             The value of the id
             </summary>
         </member>
-        <member name="T:Endahl.CSharpedSql.SqlOptions">
-            <summary>
-            Options and functions used when generating sql commands.
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.SqlItems">
-            <summary>
-            Contains all values from all queries that are added to the <see cref="T:Endahl.CSharpedSql.Sql"/> instance that this <see cref="T:Endahl.CSharpedSql.SqlOptions"/> is part of.
-            <para>If this <see cref="T:Endahl.CSharpedSql.SqlOptions"/>.UseParameters is false, when this list is null.</para>
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.ItemIdCount">
-            <summary>
-            A count of how many value that has been added by the CreateItemID methods.
-            <para>If this <see cref="T:Endahl.CSharpedSql.SqlOptions"/>.UseParameters is false, when the count will be 0.</para>
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.IdentifierLeft">
-            <summary>
-            Get the left char used to enclose a table or column name with.
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.IdentifierRight">
-            <summary>
-            Get the right char used to enclose a table or column name with.
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.SqlLanguage">
-            <summary>
-            Get the type of Sql to be generated.
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.UseParameters">
-            <summary>
-            Get an indication of whether all values will be parameterized.
-            </summary>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.#ctor(System.Char,System.Char,System.Boolean)">
-            <param name="identifierLeft">The left char to enclose a table or column name with.</param>
-            <param name="identifierRight">The right char to enclose a table or column name with.</param>
-            <param name="useParameters">Should all value be parameterized.</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.#ctor(System.Char,System.Char,Endahl.CSharpedSql.SqlLanguage,System.Boolean)">
-            <param name="identifierLeft">The left char to enclose a table or column name with.</param>
-            <param name="identifierRight">The right char to enclose a table or column name with.</param>
-            <param name="sqlLanguage">The type of Sql to be generated.</param>
-            <param name="useParameters">Should all value be parameterized.</param>
-        </member>
-        <member name="P:Endahl.CSharpedSql.SqlOptions.GetSqlItems">
-            <summary>
-            Get all values from all queries that are added to the <see cref="T:Endahl.CSharpedSql.Sql"/> instance that this <see cref="T:Endahl.CSharpedSql.SqlOptions"/> is part of.
-            <para>If this <see cref="T:Endahl.CSharpedSql.SqlOptions"/>.UseParameters is false, when this will returns null.</para>
-            </summary>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.ClearItems">
-            <summary>
-            Remove all items that has been added to this <see cref="T:Endahl.CSharpedSql.SqlOptions"/>.
-            </summary>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.IdentifieName(System.String)">
-            <summary>
-            Returns a enclosed table or column name.
-            </summary>
-            <param name="value">The table or column name to enclose.</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.SafeIdentifieName(System.String)">
-            <summary>
-            Returns a safe enclosed table or column name.
-            </summary>
-            <param name="value">The table or column name to enclose.</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.CSharpTypeToSqlDataType(Endahl.CSharpedSql.CSharpType,System.Int32,System.Int32)">
-            <summary>
-            Returns the sql type that is equal to the <see cref="T:Endahl.CSharpedSql.CSharpType"/>, used then altering or creating columns.
-            </summary>
-            <param name="type">The C# type.</param>
-            <param name="size">The size the sql type should have. Will be ignored if the <see cref="T:Endahl.CSharpedSql.CSharpType"/> don't support it.</param>
-            <param name="digits">Only used when the <see cref="T:Endahl.CSharpedSql.CSharpType"/> is Decimal</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.CreateItemID(System.Object)">
-            <summary>
-            Add a value that should be parameterized, and returns a id.
-            If this <see cref="T:Endahl.CSharpedSql.SqlOptions"/>.UseParameters is false, when the value will be returned as a string.
-            </summary>
-            <param name="value">The value to be added.</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.SqlOptions.HandleObject(System.Object)">
-            <summary>
-            Returns a object that is ready for a sql query.
-            </summary>
-            <param name="obj">The object that should be made ready a sql query.</param>
-        </member>
-        <member name="T:Endahl.CSharpedSql.SqlLanguage">
-            <summary>
-            The supported Sql languages
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.SqlLanguage.SqlServer">
-            <summary>
-            Microsoft Sql Server, also known as MS Sql
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.SqlLanguage.MySql">
-            <summary>
-            Oracle's MySql
-            </summary>
-        </member>
         <member name="T:Endahl.CSharpedSql.SqlServer.SqlServer">
             <summary>
             The base class for Sql Server / MS Sql
@@ -1578,12 +1619,23 @@
             A UPDATE statement in SQL.
             </summary>
         </member>
+        <member name="P:Endahl.CSharpedSql.Update.TableName">
+            <summary>
+            Gets the name of the table that this <see cref="T:Endahl.CSharpedSql.Update"/> is updating.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Update.Where">
+            <summary>
+            Gets or sets the <see cref="T:Endahl.CSharpedSql.Where"/> for this statement.
+            Can be null.
+            </summary>
+        </member>
         <member name="M:Endahl.CSharpedSql.Update.ToString">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Update"/> statement as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Update.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Update.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Update"/> statement as a string.
             </summary>
@@ -1593,6 +1645,18 @@
             The WHERE clause is used to filter records.
             </summary>
             <param name="where">the WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Update.op_BitwiseAnd(Endahl.CSharpedSql.Update,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that need to be true.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Update.op_BitwiseOr(Endahl.CSharpedSql.Update,Endahl.CSharpedSql.Where)">
+            <summary>
+            Add a another condition to the WHERE Clause that can be true instead.
+            </summary>
+            <param name="where">The WHERE Clause to add</param>
         </member>
         <member name="M:Endahl.CSharpedSql.Update.Set(System.String,Endahl.CSharpedSql.ColumnValue[])">
             <summary>
@@ -1611,7 +1675,7 @@
             Returns the <see cref="T:Endahl.CSharpedSql.Value"/> as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Value.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Value.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.Value"/> as a string.
             </summary>
@@ -1643,7 +1707,7 @@
             Return the <see cref="T:Endahl.CSharpedSql.Where"/> clause as a string.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Where.ToString(Endahl.CSharpedSql.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Where.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Where"/> clause as a string.
             </summary>

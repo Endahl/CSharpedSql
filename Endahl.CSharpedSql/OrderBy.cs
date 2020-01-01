@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A ORDER BY keyword in Sql
     /// </summary>
@@ -61,11 +63,5 @@
         {
             return new OrderBy(OrderByType.DESC, columnName, columnNames);
         }
-    }
-
-    public enum OrderByType
-    {
-        ASC,
-        DESC
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     public class Condition
     {
         public virtual ConditionType ConditionType { get; }
@@ -203,42 +205,5 @@
         {
             return new Condition(ConditionType.NotIn, actualColumn, select);
         }
-    }
-
-    public enum ConditionType
-    {
-        All,
-        Any,
-        Between,
-        NotBetween,
-        /// <summary>
-        /// =
-        /// </summary>
-        Equal,
-        /// <summary>
-        /// !=
-        /// </summary>
-        NotEqual,
-        Exists,
-        NotExists,
-        /// <summary>
-        /// &gt;
-        /// </summary>
-        GreaterThan,
-        /// <summary>
-        /// &lt;
-        /// </summary>
-        LessThan,
-        Like,
-        In,
-        NotIn,
-        /// <summary>
-        /// = null
-        /// </summary>
-        IsNull,
-        /// <summary>
-        /// != null
-        /// </summary>
-        IsNotNull
     }
 }

@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql.SqlServer
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// The base class for Sql Server / MS Sql
     /// </summary>

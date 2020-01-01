@@ -1,5 +1,6 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
 
     public class Having
@@ -22,6 +23,8 @@
         /// <param name="having">The HAVING Clause to add</param>
         public virtual Having And(Having having)
         {
+            if (having == null)
+                throw new System.ArgumentNullException();
             havings.Add(having);
             return this;
         }
@@ -32,6 +35,8 @@
         /// <param name="having">The HAVING Clause to add</param>
         public virtual Having Or(Having having)
         {
+            if (having == null)
+                throw new System.ArgumentNullException();
             having.and = false;
             havings.Add(having);
             return this;

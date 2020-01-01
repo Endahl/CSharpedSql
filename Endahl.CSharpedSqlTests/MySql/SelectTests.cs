@@ -79,5 +79,23 @@ namespace Endahl.CSharpedSqlTests.MySql
             //assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Select_Multi_Wheres()
+        {
+            //arrange
+            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var expected = "SELECT `hello`, `name` FROM `test` WHERE `id` = @item0 AND `name` = @item1 OR `cp` = @item2;";
+
+            //act
+            sql.Query(Select.From("test", "hello", "name")
+                + Where.Equal("id", 1)
+                + Where.Equal("name", "bob")
+                | Where.Equal("cp", 3));
+            var actual = sql.ToString().TrimEnd();
+
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

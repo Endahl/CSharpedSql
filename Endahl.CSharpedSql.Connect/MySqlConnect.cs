@@ -2,6 +2,7 @@
 
 namespace Endahl.CSharpedSql.MySql
 {
+    using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
 
     public class MySqlConnect : SqlConnect

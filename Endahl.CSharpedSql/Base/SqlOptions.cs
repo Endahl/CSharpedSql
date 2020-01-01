@@ -1,4 +1,4 @@
-﻿namespace Endahl.CSharpedSql
+﻿namespace Endahl.CSharpedSql.Base
 {
     using System;
     using System.Collections.Generic;

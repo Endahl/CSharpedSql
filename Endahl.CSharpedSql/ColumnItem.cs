@@ -1,5 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A column in a <see cref="Select"/> statement.
     /// Can be a string, a <see cref="Case"/>, a <see cref="Function"/> or a <see cref="Value"/>

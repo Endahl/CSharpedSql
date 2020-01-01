@@ -1,12 +1,25 @@
 ﻿namespace Endahl.CSharpedSql
 {
+    using Endahl.CSharpedSql.Base;
+
     /// <summary>
     /// A DELETE statement in SQL
     /// </summary>
     public class Delete: ISqlStatement
     {
+        /// <summary>
+        /// Gets the name of the table that this <see cref="Delete"/> is selecting from.
+        /// </summary>
         public virtual string TableName { get; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Where"/> for this statement.
+        /// Can be null.
+        /// </summary>
         public virtual Where Where { get; set; }
+        /// <summary>
+        /// Gets or sets the <see cref="CSharpedSql.Join"/> for this <see cref="Delete"/>.
+        /// Can be null.
+        /// </summary>
         public virtual Join Join { get; set; }
 
         protected Delete(string table)
@@ -51,6 +64,30 @@
             else
                 delete.Where.And(where);
             return delete;
+        }
+        /// <summary>
+        /// Add a another condition to the WHERE Clause that need to be true.
+        /// </summary>
+        /// <param name="where">The WHERE Clause to add</param>
+        public static Delete operator &(Delete statement, Where where)
+        {
+            if (statement.Where == null)
+                statement.Where = where;
+            else
+                statement.Where.And(where);
+            return statement;
+        }
+        /// <summary>
+        /// Add a another condition to the WHERE Clause that can be true instead.
+        /// </summary>
+        /// <param name="where">The WHERE Clause to add</param>
+        public static Delete operator |(Delete statement, Where where)
+        {
+            if (statement.Where == null)
+                throw new System.Exception("Can't use '|' then the statements 'Where' is null, use '+' or '&' insted!");
+            else
+                statement.Where.Or(where);
+            return statement;
         }
 
         /// <summary>

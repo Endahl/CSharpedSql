@@ -1,5 +1,6 @@
 ﻿namespace Endahl.CSharpedSql.SqlServer
 {
+    using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
     using System.Data.SqlClient;
 
