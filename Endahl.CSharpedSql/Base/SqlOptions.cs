@@ -108,9 +108,7 @@
                     }
                     else
                     {
-                        if (size == 0)
-                            size = 20000;
-                        if (size > 20000)
+                        if (size > 20000 || size <= 0)
                             data = "TEXT";
                         else
                             data = $"VARCHAR({size})";
