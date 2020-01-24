@@ -92,7 +92,7 @@
         /// <param name="type">The C# type.</param>
         /// <param name="size">The size the sql type should have. Will be ignored if the <see cref="CSharpType"/> don't support it.</param>
         /// <param name="digits">Only used when the <see cref="CSharpType"/> is Decimal</param>
-        public virtual string CSharpTypeToSqlDataType(CSharpType type, int size = 255, int digits = 0)
+        public virtual string CSharpTypeToSqlDataType(CSharpType type, int size = 0, int digits = 0)
         {
             string data = "";
             switch (type)
@@ -108,7 +108,7 @@
                     }
                     else
                     {
-                        if (size > 20000 || size <= 0)
+                        if (size <= 0 || size > 16383)
                             data = "TEXT";
                         else
                             data = $"VARCHAR({size})";
