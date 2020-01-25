@@ -9,11 +9,11 @@
         public Constraint Constraint { get; }
         public bool NotNull { get; }
         public bool AutoIncrement { get; }
-        public int Size { get; }
+        public uint Size { get; }
         public int Digits { get; }
         public object DefaultValue { get; }
 
-        public Column(string name, CSharpType type, int size = 0, int digits = 0, bool notNull = false,
+        public Column(string name, CSharpType type, uint size = 0, int digits = 0, bool notNull = false,
             bool autoIncrement = false, object defaultValue = null, Constraint constraint = null)
         {
             DataType = type;

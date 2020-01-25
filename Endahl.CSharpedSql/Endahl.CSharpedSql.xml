@@ -130,7 +130,7 @@
             </summary>
             <param name="value">The table or column name to enclose.</param>
         </member>
-        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.CSharpTypeToSqlDataType(Endahl.CSharpedSql.CSharpType,System.Int32,System.Int32)">
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.CSharpTypeToSqlDataType(Endahl.CSharpedSql.CSharpType,System.UInt32,System.Int32)">
             <summary>
             Returns the sql type that is equal to the <see cref="T:Endahl.CSharpedSql.CSharpType"/>, used then altering or creating columns.
             </summary>

@@ -17,7 +17,7 @@
         public virtual WhatToAlter WhatToModify { get; }
         public virtual NewColumn NewColumnToAdd { get; }
         public virtual CSharpType DataTypeToAlter { get; }
-        public virtual int DataTypeSizeToAlter { get; }
+        public virtual uint DataTypeSizeToAlter { get; }
         public virtual int DataTypeDigitsToAlter { get; }
 
         public enum WhatToAlter
@@ -54,7 +54,7 @@
             Table = table;
             WhatToModify = whatToAlter;
         }
-        protected Alter(AlterType alter, string table, WhatToAlter whatToAlter, string column, CSharpType dataType, int size, int digits)
+        protected Alter(AlterType alter, string table, WhatToAlter whatToAlter, string column, CSharpType dataType, uint size, int digits)
         {
             DataTypeToAlter = dataType;
             Column = column;
@@ -132,7 +132,7 @@
             return new Alter(AlterType.Drop, "", table, WhatToAlter.Column, column);
         }
 
-        public static Alter AlterColumn(string table, string column, CSharpType dataType, int size = 255, int digits = 0)
+        public static Alter AlterColumn(string table, string column, CSharpType dataType, uint size = 0, int digits = 0)
         {
             return new Alter(AlterType.Alter, table, WhatToAlter.Column, column, dataType, size, digits);
         }
