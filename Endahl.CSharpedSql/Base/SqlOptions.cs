@@ -165,7 +165,7 @@
                     data = SqlLanguage == SqlLanguage.SqlServer ? "bigint" : "BIGINT UNSIGNED";
                     break;
                 case CSharpType.Guid:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "uniqueidentifier" : "CHAR(36)";
+                    data = SqlLanguage == SqlLanguage.SqlServer ? "uniqueidentifier" : "BINARY(16)";
                     break;
             }
             return data;
@@ -195,12 +195,15 @@
         {
             if (obj is bool)
                 obj = (bool)obj ? 1 : 0;
-            else if (obj is Guid)
-                obj = obj.ToString();
-            else if (obj is DateTime)
-                obj = ((DateTime)obj).ToString("yyyy-MM-dd HH:mm:ss");
-            else if (obj is DateTimeOffset)
-                obj = ((DateTimeOffset)obj).ToString("yyyy-MM-dd HH:mm:ss");
+            else if (obj is Guid guid)
+                if (SqlLanguage == SqlLanguage.SqlServer)
+                    obj = guid.ToString();
+                else
+                    obj = guid.ToByteArray();
+            else if (obj is DateTime dateTime)
+                obj = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            else if (obj is DateTimeOffset dateTimeOffset)
+                obj = dateTimeOffset.ToString("yyyy-MM-dd HH:mm:ss");
             else if (SqlLanguage == SqlLanguage.SqlServer)
             {
                 if (obj is sbyte)

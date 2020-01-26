@@ -113,12 +113,13 @@ namespace Endahl.CSharpedSql.MySql
 
         public Guid GetGuid(int index)
         {
-            return (Guid)reader[index];
+            return new Guid((byte[])reader[index]);
         }
 
         public Guid GetGuid(string name)
         {
-            return (Guid)reader[name];
+            return new Guid((byte[])reader[name]);
+            
         }
 
         public int GetInt(int index)
