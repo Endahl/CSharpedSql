@@ -51,7 +51,7 @@ namespace Endahl.CSharpedSql.MySql
         /// </summary>
         public override void SetConnection(string server, string database, string user, string password)
         {
-            connection.ConnectionString = $"Server={server};Database={database};Uid={user};Pwd={password};";
+            connection.ConnectionString = $"Server={server};Database={database};Uid={user};Pwd={password};charset=utf8;";
         }
         /// <summary>
         /// Executes a parameterized SQL statement and returns the number of rows affected.
