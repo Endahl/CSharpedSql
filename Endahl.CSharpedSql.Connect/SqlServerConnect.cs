@@ -2,39 +2,47 @@
 {
     using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
 
     public class SqlServerConnect : SqlConnect
     {
-        /// <summary>
-        /// Gets or sets a indication of whether the connection to a database is open.
-        /// </summary>
-        protected bool openConnection;
         protected SqlConnection connection;
         protected SqlCommand command;
+
+        /// <summary>
+        /// Occurs when the state of the event changes.
+        /// </summary>
+        public override event StateChangeEventHandler StateChange;
 
         /// <summary>
         /// Get the options for this <see cref="SqlServerConnect"/> instance.
         /// </summary>
         public override SqlOptions SqlOptions { get; }
         /// <summary>
-        /// Gets a indication of whether the connection to a Sql Server database is open.
-        /// </summary>
-        public override bool IsConnectionOpen => openConnection;
-        /// <summary>
         /// Gets the string used to connect to a Sql Server database.
         /// </summary>
         public override string ConnectionString => connection.ConnectionString;
 
+        /// <summary>
+        /// Indicates the state of the <see cref="SqlServerConnect"/> during the most
+        /// recent network operation performed on the connection.
+        /// </summary>
+        public override ConnectionState State => connection.State;
+
         public SqlServerConnect()
         {
-            openConnection = false;
             connection = new SqlConnection();
             command = new SqlCommand
             {
                 Connection = connection
             };
             SqlOptions = new SqlOptions('[', ']', SqlLanguage.SqlServer);
+            connection.StateChange += (sender, e) =>
+            {
+                if (StateChange != null)
+                    StateChange.Invoke(sender, e);
+            };
         }
         public SqlServerConnect(string server, string database, string user, string password) : this()
         {
@@ -91,8 +99,8 @@
         /// </summary>
         public override void OpenConnection()
         {
-            connection.Open();
-            openConnection = true;
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
         }
         /// <summary>
         /// Closes the connection to the database. This is the preferred method of closing
@@ -100,8 +108,8 @@
         /// </summary>
         public override void CloseConnection()
         {
-            connection.Close();
-            openConnection = false;
+            if (connection.State != ConnectionState.Closed)
+                connection.Close();
         }
         /// <summary>
         /// Remove all quries from this <see cref="SqlServerConnect"/> instance.

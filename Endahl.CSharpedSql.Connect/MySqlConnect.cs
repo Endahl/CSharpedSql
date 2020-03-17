@@ -4,38 +4,46 @@ namespace Endahl.CSharpedSql.MySql
 {
     using Endahl.CSharpedSql.Base;
     using System.Collections.Generic;
+    using System.Data;
 
     public class MySqlConnect : SqlConnect
     {
-        /// <summary>
-        /// Gets or sets a indication of whether the connection to a database is open.
-        /// </summary>
-        protected bool openConnection;
         protected MySqlConnection connection;
         protected MySqlCommand command;
+
+        /// <summary>
+        /// Occurs when the state of the event changes.
+        /// </summary>
+        public override event StateChangeEventHandler StateChange;
 
         /// <summary>
         /// Get the options for this <see cref="MySqlConnect"/> instance.
         /// </summary>
         public override SqlOptions SqlOptions { get; }
         /// <summary>
-        /// Gets a indication of whether the connection to a MySql database is open.
-        /// </summary>
-        public override bool IsConnectionOpen => openConnection;
-        /// <summary>
         /// Gets the string used to connect to a MySql database.
         /// </summary>
         public override string ConnectionString => connection.ConnectionString;
 
+        /// <summary>
+        /// Indicates the state of the <see cref="MySqlConnect"/> during the most
+        /// recent network operation performed on the connection.
+        /// </summary>
+        public override ConnectionState State => connection.State;
+
         public MySqlConnect()
         {
-            openConnection = false;
             connection = new MySqlConnection();
             command = new MySqlCommand
             {
                 Connection = connection
             };
             SqlOptions = new SqlOptions('`', '`', SqlLanguage.MySql);
+            connection.StateChange += (sender, e) =>
+            {
+                if (StateChange != null)
+                    StateChange.Invoke(sender, e);
+            };
         }
         public MySqlConnect(string server, string database, string user, string password) : this()
         {
@@ -51,7 +59,7 @@ namespace Endahl.CSharpedSql.MySql
         /// </summary>
         public override void SetConnection(string server, string database, string user, string password)
         {
-            connection.ConnectionString = $"Server={server};Database={database};Uid={user};Pwd={password};charset=utf8;";
+            connection.ConnectionString = $"Server={server};Database={database};Uid={user};Pwd={password};ConvertZeroDateTime=true;";
         }
         /// <summary>
         /// Executes a parameterized SQL statement and returns the number of rows affected.
@@ -92,8 +100,8 @@ namespace Endahl.CSharpedSql.MySql
         /// </summary>
         public override void OpenConnection()
         {
-            connection.Open();
-            openConnection = true;
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
         }
         /// <summary>
         /// Closes the connection to the database. This is the preferred method of closing
@@ -101,8 +109,8 @@ namespace Endahl.CSharpedSql.MySql
         /// </summary>
         public override void CloseConnection()
         {
-            connection.Close();
-            openConnection = false;
+            if (connection.State != ConnectionState.Closed)
+                connection.Close();
         }
         /// <summary>
         /// Remove all quries from this <see cref="MySqlConnect"/> instance.

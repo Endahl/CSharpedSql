@@ -4,9 +4,9 @@
         <name>Endahl.CSharpedSql.Connect</name>
     </assembly>
     <members>
-        <member name="F:Endahl.CSharpedSql.MySql.MySqlConnect.openConnection">
+        <member name="E:Endahl.CSharpedSql.MySql.MySqlConnect.StateChange">
             <summary>
-            Gets or sets a indication of whether the connection to a database is open.
+            Occurs when the state of the event changes.
             </summary>
         </member>
         <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.SqlOptions">
@@ -14,14 +14,15 @@
             Get the options for this <see cref="T:Endahl.CSharpedSql.MySql.MySqlConnect"/> instance.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.IsConnectionOpen">
-            <summary>
-            Gets a indication of whether the connection to a MySql database is open.
-            </summary>
-        </member>
         <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.ConnectionString">
             <summary>
             Gets the string used to connect to a MySql database.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.MySql.MySqlConnect.State">
+            <summary>
+            Indicates the state of the <see cref="T:Endahl.CSharpedSql.MySql.MySqlConnect"/> during the most
+            recent network operation performed on the connection.
             </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.MySql.MySqlConnect.SetConnection(System.String,System.String,System.String,System.String)">
@@ -148,9 +149,9 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="F:Endahl.CSharpedSql.SqlServer.SqlServerConnect.openConnection">
+        <member name="E:Endahl.CSharpedSql.SqlServer.SqlServerConnect.StateChange">
             <summary>
-            Gets or sets a indication of whether the connection to a database is open.
+            Occurs when the state of the event changes.
             </summary>
         </member>
         <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.SqlOptions">
@@ -158,14 +159,15 @@
             Get the options for this <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerConnect"/> instance.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.IsConnectionOpen">
-            <summary>
-            Gets a indication of whether the connection to a Sql Server database is open.
-            </summary>
-        </member>
         <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.ConnectionString">
             <summary>
             Gets the string used to connect to a Sql Server database.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlServer.SqlServerConnect.State">
+            <summary>
+            Indicates the state of the <see cref="T:Endahl.CSharpedSql.SqlServer.SqlServerConnect"/> during the most
+            recent network operation performed on the connection.
             </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.SqlServer.SqlServerConnect.SetConnection(System.String,System.String,System.String,System.String)">

@@ -1,14 +1,12 @@
-﻿namespace Endahl.CSharpedSql
+﻿using System.Data;
+
+namespace Endahl.CSharpedSql
 {
     /// <summary>
     /// The Base class for all Connect types.
     /// </summary>
     public abstract class SqlConnect: Sql
     {
-        /// <summary>
-        /// Gets a indication of whether the connection to a database is open.
-        /// </summary>
-        public abstract bool IsConnectionOpen { get; }
         /// <summary>
         /// Gets the string used to connect to a database.
         /// </summary>
@@ -18,6 +16,12 @@
         /// Sets the string used to connect to a database.
         /// </summary>
         public abstract void SetConnection(string server, string database, string user, string password);
+
+        /// <summary>
+        /// Indicates the state of the <see cref="SqlConnect"/> during the most
+        /// recent network operation performed on the connection.
+        /// </summary>
+        public abstract ConnectionState State { get; }
 
         /// <summary>
         /// Executes a parameterized SQL statement and returns the number of rows affected.
@@ -45,5 +49,10 @@
         /// any open connection.
         /// </summary>
         public abstract void CloseConnection();
+
+        /// <summary>
+        /// Occurs when the state of the event changes.
+        /// </summary>
+        public abstract event StateChangeEventHandler StateChange;
     }
 }

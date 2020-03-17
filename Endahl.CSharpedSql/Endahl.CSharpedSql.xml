@@ -1539,11 +1539,6 @@
             The Base class for all Connect types.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.SqlConnect.IsConnectionOpen">
-            <summary>
-            Gets a indication of whether the connection to a database is open.
-            </summary>
-        </member>
         <member name="P:Endahl.CSharpedSql.SqlConnect.ConnectionString">
             <summary>
             Gets the string used to connect to a database.
@@ -1552,6 +1547,12 @@
         <member name="M:Endahl.CSharpedSql.SqlConnect.SetConnection(System.String,System.String,System.String,System.String)">
             <summary>
             Sets the string used to connect to a database.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.SqlConnect.State">
+            <summary>
+            Indicates the state of the <see cref="T:Endahl.CSharpedSql.SqlConnect"/> during the most
+            recent network operation performed on the connection.
             </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.SqlConnect.Execute">
@@ -1582,6 +1583,11 @@
             <summary>
             Closes the connection to the database. This is the preferred method of closing
             any open connection.
+            </summary>
+        </member>
+        <member name="E:Endahl.CSharpedSql.SqlConnect.StateChange">
+            <summary>
+            Occurs when the state of the event changes.
             </summary>
         </member>
         <member name="T:Endahl.CSharpedSql.SqlItem">
