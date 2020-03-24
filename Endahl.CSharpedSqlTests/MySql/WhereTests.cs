@@ -199,5 +199,20 @@ namespace Endahl.CSharpedSqlTests.MySql
             //assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void Where_Parentheses()
+        {
+            //arrange
+            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var expected = "SELECT * FROM `test` WHERE (`id` = @item0 OR `pas` = @item1) AND `name` <> @item2;";
+
+            //act
+            sql.Query(Select.From("test") + Where.Parentheses(Where.Equal("id", 23) | Where.Equal("pas", 1)) & Where.NotEqual("name", "Tim"));
+            var actual = sql.ToString().TrimEnd();
+
+            //assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

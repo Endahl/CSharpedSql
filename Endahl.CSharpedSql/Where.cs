@@ -8,7 +8,7 @@
     /// </summary>
     public class Where
     {
-        private bool and = true;
+        internal protected bool and = true;
 
         protected List<Where> wheres;
 
@@ -64,7 +64,7 @@
             return "WHERE " + ToStringWihtoutWhere(sql);
         }
 
-        private string ToStringWihtoutWhere(SqlOptions sql)
+        internal protected virtual string ToStringWihtoutWhere(SqlOptions sql)
         {
             var where = Condition.ToString(sql);
 
@@ -246,6 +246,38 @@
         public static Where NotIn(string coulmn, Select select)
         {
             return new Where(Condition.NotIn(coulmn, select));
+        }
+
+        /// <summary>
+        /// Use parentheses around a where clause. (...)
+        /// </summary>
+        /// <param name="where">The where clause that should be inside the parentheses</param>
+        public static Where Parentheses(Where where)
+        {
+            return new ParenthesesWhere(where);
+        }
+    }
+
+    internal class ParenthesesWhere : Where
+    {
+        public Where where;
+
+        public ParenthesesWhere(Where where) : base(null)
+        {
+            this.where = where;
+        }
+
+        protected internal override string ToStringWihtoutWhere(SqlOptions sql)
+        {
+            var result = '(' + where?.ToStringWihtoutWhere(sql) + ')';
+            foreach (var wh in wheres)
+            {
+                if (wh.and)
+                    result += " AND " + wh.ToStringWihtoutWhere(sql);
+                else
+                    result += " OR " + wh.ToStringWihtoutWhere(sql);
+            }
+            return result;
         }
     }
 }

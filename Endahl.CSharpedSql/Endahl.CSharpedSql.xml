@@ -1830,5 +1830,11 @@
             <param name="column">the column to look at</param>
             <param name="select">the SELECT statement to check on</param>
         </member>
+        <member name="M:Endahl.CSharpedSql.Where.Parentheses(Endahl.CSharpedSql.Where)">
+            <summary>
+            Use parentheses around a where clause. (...)
+            </summary>
+            <param name="where">The where clause that should be inside the parentheses</param>
+        </member>
     </members>
 </doc>
