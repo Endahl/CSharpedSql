@@ -91,6 +91,22 @@
         {
             Quries.Add(select);
         }
+        /// <summary>
+        /// Add a query to this <see cref="Sql"/> instance.
+        /// </summary>
+        /// <param name="statement"></param>
+        public virtual void Query(QueryString statement)
+        {
+            Quries.Add(statement);
+        }
+        /// <summary>
+        /// Add a query to this <see cref="Sql"/> instance.
+        /// </summary>
+        /// <param name="statement"></param>
+        public virtual void Query(ISqlStatement statement)
+        {
+            Quries.Add(statement);
+        }
 
         /// <summary>
         /// Return the SQL query/queris as a string.

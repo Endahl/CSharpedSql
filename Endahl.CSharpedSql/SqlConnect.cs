@@ -1,7 +1,7 @@
-﻿using System.Data;
-
-namespace Endahl.CSharpedSql
+﻿namespace Endahl.CSharpedSql
 {
+    using System.Data;
+
     /// <summary>
     /// The Base class for all Connect types.
     /// </summary>

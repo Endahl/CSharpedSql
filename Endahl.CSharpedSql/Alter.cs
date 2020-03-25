@@ -20,14 +20,6 @@
         public virtual uint DataTypeSizeToAlter { get; }
         public virtual int DataTypeDigitsToAlter { get; }
 
-        public enum WhatToAlter
-        {
-            PrimaryKey,
-            ForeignKey,
-            Unique,
-            Column,
-        }
-
         protected Alter(AlterType alter, string constraintName, string table, WhatToAlter whatToAlter, string column)
         {
             Column = column;

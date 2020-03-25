@@ -122,9 +122,9 @@
         {
             if (item.Constraint != null)
             {
-                if (item.Constraint.ConstraintKey == Constraint.Key.PrimaryKey)
+                if (item.Constraint.ConstraintKey == ConstraintKey.PrimaryKey)
                     Primarys.Add(item);
-                else if (item.Constraint.ConstraintKey == Constraint.Key.ForeignKey)
+                else if (item.Constraint.ConstraintKey == ConstraintKey.ForeignKey)
                     Foreigns.Add(item);
                 else
                     Uniques.Add(item);

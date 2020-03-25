@@ -1342,6 +1342,26 @@
             </summary>
             <param name="columnName">the column to order by</param>
         </member>
+        <member name="P:Endahl.CSharpedSql.QueryString.MySql">
+            <summary>
+            Gets or Sets the MySql command
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.QueryString.SqlServer">
+            <summary>
+            Gets or Sets the Sql Server command
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.QueryString.ToString">
+            <summary>
+            Returns the <see cref="T:Endahl.CSharpedSql.QueryString"/> statement as a string.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.QueryString.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
+            <summary>
+            Returns the <see cref="T:Endahl.CSharpedSql.QueryString"/> statement as a string.
+            </summary>
+        </member>
         <member name="T:Endahl.CSharpedSql.Select">
             <summary>
             A SELECT statement for SQL.
@@ -1528,6 +1548,18 @@
             Add a query to this <see cref="T:Endahl.CSharpedSql.Sql"/> instance.
             </summary>
             <param name="select">A SELECT statement</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Sql.Query(Endahl.CSharpedSql.QueryString)">
+            <summary>
+            Add a query to this <see cref="T:Endahl.CSharpedSql.Sql"/> instance.
+            </summary>
+            <param name="statement"></param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Sql.Query(Endahl.CSharpedSql.Base.ISqlStatement)">
+            <summary>
+            Add a query to this <see cref="T:Endahl.CSharpedSql.Sql"/> instance.
+            </summary>
+            <param name="statement"></param>
         </member>
         <member name="M:Endahl.CSharpedSql.Sql.ToString">
             <summary>
