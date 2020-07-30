@@ -1,8 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-
-namespace Endahl.CSharpedSql.MySql
+﻿namespace Endahl.CSharpedSql.MySql
 {
     using Endahl.CSharpedSql.Base;
+    using MySqlConnector;
     using System.Collections.Generic;
     using System.Data;
 
