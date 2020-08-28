@@ -28,11 +28,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            return DropIfTableExists ?
-                (sql.SqlLanguage == SqlLanguage.SqlServer
-                ? $"IF(object_id(N'{sql.IdentifieName(TableName)}', N'U') IS NULL BEGIN DROP TABLE {sql.IdentifieName(TableName)}"
-                : $"DROP TABLE IF EXISTS {sql.IdentifieName(TableName)}")
-                : $"DROP TABLE {sql.IdentifieName(TableName)}";
+            return sql.SqlBase.Drop(this, sql);
         }
 
         /// <summary>

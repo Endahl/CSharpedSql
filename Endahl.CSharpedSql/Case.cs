@@ -5,8 +5,8 @@
 
     public class Case: ColumnItem
     {
-        protected virtual List<Case> Whens { get; }
-        protected virtual object ElseResult { get; set; }
+        public virtual List<Case> Whens { get; }
+        public virtual object ElseResult { get; set; }
 
         public virtual Condition Condition { get; }
         public virtual object Result { get; }
@@ -31,14 +31,7 @@
         /// </summary>
         public override string ToString(SqlOptions sql)
         {
-            var @case = $"CASE WHEN {Condition.ToString(sql)} THEN {sql.CreateItemID(Result)} ";
-            foreach (var when in Whens)
-            {
-                @case += $"WHEN {when.Condition.ToString(sql)} THEN {sql.CreateItemID(when.Result)} ";
-            }
-            if (ElseResult != null)
-                @case += $"ELSE {sql.CreateItemID(ElseResult)} ";
-            return @case + "END";
+            return sql.SqlBase.Case(this, sql);
         }
 
         public virtual Case ElseIf(Condition condition, object result)

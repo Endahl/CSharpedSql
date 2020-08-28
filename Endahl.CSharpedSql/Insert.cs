@@ -29,21 +29,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            string s, v;
-            s = v = "";
-            if (ColumnValues.Length > 0)
-            {
-                s = sql.IdentifieName(ColumnValues[0].ColumnName);
-                v = ColumnValues[0].Value is InsertFunction ? (ColumnValues[0].Value as InsertFunction).ToString(sql)
-                    : sql.CreateItemID(ColumnValues[0].Value);
-                for (var i = 1; i < ColumnValues.Length; i++)
-                {
-                    s += $", {sql.IdentifieName(ColumnValues[i].ColumnName)}";
-                    v += ", " + (ColumnValues[i].Value is InsertFunction ? (ColumnValues[i].Value as InsertFunction).ToString(sql)
-                                : sql.CreateItemID(ColumnValues[i].Value));
-                }
-            }
-            return $"INSERT INTO {sql.IdentifieName(TableName)} ({s}) VALUES ({v})";
+            return sql.SqlBase.Insert(this, sql);
         }
 
         /// <summary>

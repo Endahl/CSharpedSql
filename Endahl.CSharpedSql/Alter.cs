@@ -69,50 +69,8 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var statement = $"ALTER TABLE {sql.IdentifieName(Table)} ";
-            switch (WhatToModify)
-            {
-                case WhatToAlter.PrimaryKey:
-                    var columnPK = sql.IdentifieName(Column);
-                    foreach (var c in ExtraPrimaryKeyColumns)
-                        columnPK += $",{sql.IdentifieName(c)}";
-                    statement += AlterType == AlterType.Add
-                        ? $"ADD CONSTRAINT {sql.SafeIdentifieName(ConstraintName)} PRIMARY KEY ({columnPK})"
-                        : (sql.SqlLanguage == SqlLanguage.SqlServer ? $"DROP CONSTRAINT {sql.SafeIdentifieName(ConstraintName)}": $"DROP PRIMARY KEY");
-                    break;
-                case WhatToAlter.ForeignKey:
-                    statement += AlterType == AlterType.Add
-                        ? $"ADD CONSTRAINT {sql.SafeIdentifieName(ConstraintName)} FOREIGN KEY ({Column}) REFERENCES " +
-                            $"{sql.IdentifieName(ReferencesTable)}({sql.IdentifieName(ReferencesColumn)})"
-                        : (sql.SqlLanguage == SqlLanguage.SqlServer ? $"DROP CONSTRAINT {sql.SafeIdentifieName(ConstraintName)}"
-                            : $"DROP FOREIGN KEY {sql.SafeIdentifieName(ConstraintName)}");
-                    break;
-                case WhatToAlter.Unique:
-                    statement += AlterType == AlterType.Add
-                        ? $"ADD CONSTRAINT {sql.SafeIdentifieName(ConstraintName)} UNIQUE ({Column})"
-                        : (sql.SqlLanguage == SqlLanguage.SqlServer ? $"DROP CONSTRAINT {sql.SafeIdentifieName(ConstraintName)}" : $"DROP INDEX KEY");
-                    break;
-                case WhatToAlter.Column:
-                    switch (AlterType)
-                    {
-                        case AlterType.Add:
-                            statement += $"ADD {NewColumnToAdd.ToString(sql)}";
-                            break;
-                        case AlterType.Drop:
-                            statement += $"DROP COLUMN {sql.IdentifieName(Column)}";
-                            break;
-                        case AlterType.Alter:
-                            statement += sql.SqlLanguage == SqlLanguage.SqlServer ? $"ALTER" : $"MODIFY";
-                            statement += $"COLUMN {sql.IdentifieName(Column)} " +
-                                $"{sql.CSharpTypeToSqlDataType(DataTypeToAlter, DataTypeSizeToAlter, DataTypeDigitsToAlter)}";
-                            break;
-                    }
-                    break;
-            }
-
-            return statement;
+            return sql.SqlBase.Alter(this, sql);
         }
-
 
         public static Alter AddColumn(string table, NewColumn column)
         {

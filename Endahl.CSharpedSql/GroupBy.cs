@@ -28,10 +28,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var result = $"GROUP BY {sql.IdentifieName(ColumnNames[0])}";
-            for (var i = 1; i < ColumnNames.Length; i++)
-                result += $", {sql.IdentifieName(ColumnNames[i])}";
-            return result;
+            return sql.SqlBase.GroupBy(this, sql);
         }
 
         public static GroupBy Column(string columnName, params string[] columnNames)

@@ -8,9 +8,9 @@
     /// </summary>
     public class Where
     {
-        internal protected bool and = true;
+        public virtual bool IsAnd { get; protected set; } = true;
 
-        protected List<Where> wheres;
+        public virtual IList<Where> Wheres { get; }
 
         /// <summary>
         /// Gets the <see cref="CSharpedSql.Condition"/> for this <see cref="Where"/>
@@ -19,7 +19,7 @@
 
         protected Where(Condition condition)
         {
-            wheres = new List<Where>();
+            Wheres = new List<Where>();
             Condition = condition;
         }
 
@@ -31,7 +31,7 @@
         {
             if (where == null)
                 throw new System.ArgumentNullException();
-            wheres.Add(where);
+            Wheres.Add(where);
             return this;
         }
 
@@ -43,8 +43,8 @@
         {
             if (where == null)
                 throw new System.ArgumentNullException();
-            where.and = false;
-            wheres.Add(where);
+            where.IsAnd = false;
+            Wheres.Add(where);
             return this;
         }
 
@@ -61,21 +61,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            return "WHERE " + ToStringWihtoutWhere(sql);
-        }
-
-        internal protected virtual string ToStringWihtoutWhere(SqlOptions sql)
-        {
-            var where = Condition.ToString(sql);
-
-            foreach (var wh in wheres)
-            {
-                if (wh.and)
-                    where += " AND " + wh.ToStringWihtoutWhere(sql);
-                else
-                    where += " OR " + wh.ToStringWihtoutWhere(sql);
-            }
-            return where;
+            return sql.SqlBase.Where(this, sql);
         }
 
         /// <summary>
@@ -255,29 +241,6 @@
         public static Where Parentheses(Where where)
         {
             return new ParenthesesWhere(where);
-        }
-    }
-
-    internal class ParenthesesWhere : Where
-    {
-        public Where where;
-
-        public ParenthesesWhere(Where where) : base(null)
-        {
-            this.where = where;
-        }
-
-        protected internal override string ToStringWihtoutWhere(SqlOptions sql)
-        {
-            var result = '(' + where?.ToStringWihtoutWhere(sql) + ')';
-            foreach (var wh in wheres)
-            {
-                if (wh.and)
-                    result += " AND " + wh.ToStringWihtoutWhere(sql);
-                else
-                    result += " OR " + wh.ToStringWihtoutWhere(sql);
-            }
-            return result;
         }
     }
 }

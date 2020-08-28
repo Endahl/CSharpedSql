@@ -68,47 +68,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            switch (ConditionType)
-            {
-                case ConditionType.Between:
-                    return $"{Column.ToString(sql)} BETWEEN {sql.CreateItemID(Item)} AND {sql.CreateItemID(Item2)}";
-                case ConditionType.NotBetween:
-                    return $"{Column.ToString(sql)} NOT BETWEEN {sql.CreateItemID(Item)} AND {sql.CreateItemID(Item2)}";
-                case ConditionType.Equal:
-                    return ConditionToString("=", sql);
-                case ConditionType.NotEqual:
-                    return ConditionToString("<>", sql);
-                case ConditionType.GreaterThan:
-                    return ConditionToString(">", sql);
-                case ConditionType.LessThan:
-                    return ConditionToString("<", sql);
-                case ConditionType.Like:
-                    return ConditionToString("LIKE", sql);
-                case ConditionType.IsNull:
-                    return $"{Column.ToString(sql)} IS NULL";
-                case ConditionType.IsNotNull:
-                    return $"{Column.ToString(sql)} IS NOT NULL";
-                case ConditionType.All:
-                    return $"{Column.ToString(sql)} = ALL ({(Item as Select).ToString(sql)})";
-                case ConditionType.Any:
-                    return $"{Column.ToString(sql)} = ANY ({(Item as Select).ToString(sql)})";
-                case ConditionType.Exists:
-                    return $"EXISTS ({(Item as Select).ToString(sql)})";
-                case ConditionType.NotExists:
-                    return $"NOT EXISTS ({(Item as Select).ToString(sql)})";
-                case ConditionType.In:
-                    return $"{Column.ToString(sql)} IN ({(Item as Select).ToString(sql)})";
-                case ConditionType.NotIn:
-                    return $"{Column.ToString(sql)} NOT IN ({(Item as Select).ToString(sql)})";
-                default:
-                    return "";
-            }
-        }
-
-        private string ConditionToString(string condition, SqlOptions sql)
-        {
-            var result = Column != null ? Column.ToString(sql) : sql.CreateItemID(Item);
-            return $"{result} {condition} {sql.CreateItemID(Item2)}";
+            return sql.SqlBase.Condition(this, sql);
         }
 
         public static Condition All(ColumnItem actualColumn, Select expected)

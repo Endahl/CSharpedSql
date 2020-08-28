@@ -38,21 +38,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var line = $"{sql.IdentifieName(Name)} ";
-
-            line += sql.CSharpTypeToSqlDataType(DataType, Size, Digits);
-
-            line += NotNull ? " NOT NULL" : "";
-            if (AutoIncrement)
-            {
-                line += sql.SqlLanguage == SqlLanguage.SqlServer ? " IDENTITY(1,1)" : " AUTO_INCREMENT";
-            }
-            else if (DefaultValue != null)
-            {
-                line += $" DEFAULT {sql.CreateItemID(DefaultValue)}";
-            }
-
-            return line;
+            return sql.SqlBase.Column(this, sql);
         }
     }
 }

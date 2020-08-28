@@ -15,11 +15,11 @@
         /// The select used for CopyFrom(...)
         /// </summary>
         public Select Select { get; }
-        protected List<Column> Columns { get; }
+        public List<Column> Columns { get; }
 
-        protected IList<Column> Primarys { get; }
-        protected IList<Column> Foreigns { get; }
-        protected IList<Column> Uniques { get; }
+        public IList<Column> Primarys { get; }
+        public IList<Column> Foreigns { get; }
+        public IList<Column> Uniques { get; }
 
         protected Create(CreateType type, string name)
         {
@@ -68,67 +68,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            switch (CreateType)
-            {
-                case CreateType.Table:
-                    return "CREATE " + CreateTable(sql);
-                case CreateType.TableIfNotExists:
-                    return sql.SqlLanguage == SqlLanguage.SqlServer ?
-                        $"IF(object_id(N'{sql.IdentifieName(TableName)}', N'U') IS NULL BEGIN CREATE TABLE {CreateTable(sql)}; END"
-                        : $"CREATE TABLE IF NOT EXISTS {CreateTable(sql)}";
-                case CreateType.Copy:
-                    return $"CREATE TABLE {sql.IdentifieName(TableName)} AS {Select.ToString(sql)}";
-                default:
-                    return "";
-            }
-        }
-
-        private string CreateTable(SqlOptions sql)
-        {
-            var statement = $"{sql.IdentifieName(TableName)} (";
-            if (Columns.Count > 0)
-            {
-                statement += $"{Columns[0].ToString(sql)}";
-                AddConstraint(Columns[0]);
-
-                for (var i = 1; i < Columns.Count; i++)
-                {
-                    statement += $", {Columns[i].ToString(sql)}";
-                    AddConstraint(Columns[i]);
-                }
-
-                if (Primarys.Count > 0)
-                {
-                    statement += $", CONSTRAINT {sql.IdentifierLeft}pk_{TableName}{sql.IdentifierRight} PRIMARY KEY ({sql.IdentifierLeft}{Primarys[0].Name}{sql.IdentifierRight}";
-                    for (var i = 1; i < Primarys.Count; i++)
-                        statement += $",{sql.IdentifierLeft}{Primarys[i].Name}{sql.IdentifierRight}";
-                    statement += ')';
-                }
-                foreach (var f in Foreigns)
-                {
-                    statement += $", CONSTRAINT {sql.IdentifierLeft}fk_{TableName}_{f.Name}{sql.IdentifierRight} FOREIGN KEY " +
-                        $"({sql.IdentifierLeft}{f.Name}{sql.IdentifierRight}) REFERENCES " +
-                        $"{sql.IdentifierLeft}{f.Constraint.Table}{sql.IdentifierRight}({sql.IdentifierLeft}{f.Constraint.Column}{sql.IdentifierRight})";
-                }
-                foreach (var u in Uniques)
-                {
-                    statement += $", CONSTRAINT {sql.IdentifierLeft}uc_{TableName}_{u.Name}{sql.IdentifierRight} UNIQUE ({sql.IdentifierLeft}{u.Name}{sql.IdentifierRight})";
-                }
-            }
-            return statement + ')';
-        }
-
-        private void AddConstraint(Column item)
-        {
-            if (item.Constraint != null)
-            {
-                if (item.Constraint.ConstraintKey == ConstraintKey.PrimaryKey)
-                    Primarys.Add(item);
-                else if (item.Constraint.ConstraintKey == ConstraintKey.ForeignKey)
-                    Foreigns.Add(item);
-                else
-                    Uniques.Add(item);
-            }
+            return sql.SqlBase.Create(this, sql);
         }
 
         /// <summary>

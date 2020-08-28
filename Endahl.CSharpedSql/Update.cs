@@ -36,13 +36,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var statement = $"UPDATE {sql.IdentifieName(TableName)} SET {sql.IdentifieName(ColumnValues[0].ColumnName)} " +
-                $"= {sql.CreateItemID(ColumnValues[0].Value)}";
-            foreach (var item in ColumnValues)
-                statement += $", {sql.IdentifieName(item.ColumnName)} = {sql.CreateItemID(item.Value)}";
-            if (Where != null)
-                statement += " " + Where.ToString(sql);
-            return statement;
+            return sql.SqlBase.Update(this, sql);
         }
 
         /// <summary>

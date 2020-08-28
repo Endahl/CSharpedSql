@@ -14,7 +14,7 @@
 
         public MySql()
         {
-            SqlOptions = new SqlOptions('`', '`', SqlLanguage.MySql);
+            SqlOptions = new SqlOptions('`', '`', new Base.MySqlBase());
         }
     }
 }

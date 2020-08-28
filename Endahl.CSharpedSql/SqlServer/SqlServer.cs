@@ -14,7 +14,7 @@
 
         public SqlServer()
         {
-            SqlOptions = new SqlOptions('[', ']', SqlLanguage.SqlServer);
+            SqlOptions = new SqlOptions('[', ']', new Base.SqlServerBase());
         }
     }
 }

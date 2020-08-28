@@ -10,7 +10,12 @@
         /// <summary>
         /// The limit of rows to find. Is only sets then the method <see cref="Select"/>.TopFrom() is called.
         /// </summary>
-        protected int top = 0;
+        public virtual int Top { get; protected set; } = 0;
+
+        /// <summary>
+        /// Specify which row to start retrieving data from. Is only sets then the method <see cref="Select"/>.TopFrom() is called.
+        /// </summary>
+        public virtual int Offset { get; protected set; } = -1;
 
         /// <summary>
         /// Gets the name of the table that this <see cref="Select"/> is selecting from.
@@ -69,45 +74,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var limit = "";
-            var ex = "";
-            if (SelectType == SelectType.Distinct)
-                ex = "DISTINCT ";
-            else if (SelectType == SelectType.Top)
-            {
-                if (sql.SqlLanguage == SqlLanguage.SqlServer)
-                    ex = $"TOP {top} ";
-                else
-                    limit = " LIMIT " + top;
-            }
-
-            var selectString = $"SELECT {ex}";
-            if (Columns.Length == 0)
-                selectString += "*";
-            else
-            {
-                selectString += $"{Columns[0].ToString(sql)}";
-                if (Columns[0] is Case || Columns[0] is Function || Columns[0] is Value)
-                    selectString += $" AS {sql.IdentifieName(Columns[0].Name)}";
-                for (var i = 1; i < Columns.Length; i++)
-                {
-                    selectString += $", {Columns[i].ToString(sql)}";
-                    if (Columns[i] is Case || Columns[i] is Function || Columns[i] is Value)
-                        selectString += $" AS {sql.IdentifieName(Columns[i].Name)}";
-                }
-            }
-            selectString += $" FROM {sql.IdentifieName(TableName)}";
-            if (Join != null)
-                selectString += " " + Join.ToString(TableName, sql);
-            if (Where != null)
-                selectString += " " + Where.ToString(sql);
-            if (GroupBy != null)
-                selectString += " " + GroupBy.ToString(sql);
-            if (Having != null)
-                selectString += " " + Having.ToString(sql);
-            if (OrderBy != null)
-                selectString += " " + OrderBy.ToString(sql);
-            return selectString + limit;
+            return sql.SqlBase.Select(this, sql);
         }
 
         /// <summary>
@@ -194,7 +161,10 @@
         /// <param name="join">the JOIN clause to add</param>
         public static Select operator +(Select select, Join join)
         {
-            select.Join = join;
+            if (select.Join == null)
+                select.Join = join;
+            else
+                select.Join.Joins.Add(join);
             return select;
         }
 
@@ -227,7 +197,23 @@
         {
             return new Select(table, SelectType.Top, columns)
             {
-                top = top
+                Top = top
+            };
+        }
+        /// <summary>
+        /// The SELECT TOP clause is used to specify the number of records to return.
+        /// <para>In MySql this is the same as LIMIT.</para>
+        /// </summary>
+        /// <param name="top">the max number to return</param>
+        /// <param name="offset">Specify which row to start retrieving data from</param>
+        /// <param name="table">the table to select from</param>
+        /// <param name="columns">the columns to return</param>
+        public static Select TopFrom(int top, int offset, string table, params ColumnItem[] columns)
+        {
+            return new Select(table, SelectType.Top, columns)
+            {
+                Top = top,
+                Offset = offset
             };
         }
     }

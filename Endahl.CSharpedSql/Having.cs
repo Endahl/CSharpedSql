@@ -5,15 +5,15 @@
 
     public class Having
     {
-        private bool and = true;
+        public bool IsAnd { get; protected set; } = true;
 
-        protected List<Having> havings;
+        public List<Having> Havings { get; }
 
         public virtual Condition Condition { get; }
 
         protected Having(Condition condition)
         {
-            havings = new List<Having>();
+            Havings = new List<Having>();
             Condition = condition;
         }
 
@@ -25,7 +25,7 @@
         {
             if (having == null)
                 throw new System.ArgumentNullException();
-            havings.Add(having);
+            Havings.Add(having);
             return this;
         }
 
@@ -37,8 +37,8 @@
         {
             if (having == null)
                 throw new System.ArgumentNullException();
-            having.and = false;
-            havings.Add(having);
+            having.IsAnd = false;
+            Havings.Add(having);
             return this;
         }
 
@@ -54,20 +54,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            return "HAVING " + ToStringWihtoutWhere(sql);
-        }
-        private string ToStringWihtoutWhere(SqlOptions sql)
-        {
-            var having = Condition.ToString(sql);
-
-            foreach (var h in havings)
-            {
-                if (h.and)
-                    having += " AND " + h.ToStringWihtoutWhere(sql);
-                else
-                    having += " OR " + h.ToStringWihtoutWhere(sql);
-            }
-            return having;
+            return sql.SqlBase.Having(this, sql);
         }
 
         /// <summary>

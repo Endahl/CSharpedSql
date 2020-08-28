@@ -32,19 +32,7 @@
         /// </summary>
         public string ToString(SqlOptions sql)
         {
-            var orderBy = "ORDER BY ";
-            if (Columns[0] is Case)
-                orderBy += $"({Columns[0].ToString(sql)})";
-            else
-                orderBy += Columns[0].ToString(sql);
-            for (var i = 1; i < Columns.Length; i++)
-            {
-                if (Columns[i] is Case)
-                    orderBy += $", ({Columns[i].ToString(sql)})";
-                else
-                    orderBy += $", {Columns[i].ToString(sql)}";
-            }
-            return  orderBy += $" {OrderByType.ToString()}";
+            return sql.SqlBase.OrderBy(this, sql);
         }
 
         /// <summary>

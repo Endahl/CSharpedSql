@@ -40,17 +40,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            var statement = "DELETE ";
-            if (Join != null)
-                statement += $"{TableName} ";
-
-            statement += $"FROM {sql.IdentifieName(TableName)}";
-
-            if (Join != null)
-                statement += $" {Join.ToString(TableName, sql)}";
-            if (Where != null)
-                statement += $" {Where.ToString(sql)}";
-            return statement;
+            return sql.SqlBase.Delete(this, sql);
         }
 
         /// <summary>
@@ -98,7 +88,10 @@
         /// <param name="join">the JOIN Clause to add</param>
         public static Delete operator +(Delete delete, Join join)
         {
-            delete.Join = join;
+            if (delete.Join == null)
+                delete.Join = join;
+            else
+                delete.Join.Joins.Add(join);
             return delete;
         }
 

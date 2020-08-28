@@ -28,30 +28,22 @@
         /// </summary>
         public char IdentifierRight { get; }
         /// <summary>
-        /// Get the type of Sql to be generated.
-        /// </summary>
-        public SqlLanguage SqlLanguage { get; }
-        /// <summary>
         /// Get an indication of whether all values will be parameterized.
         /// </summary>
         public bool UseParameters { get; }
 
-        public SqlOptions() : this('[', ']', false) { }
+        public ISqlBase SqlBase { get; }
+
+        public SqlOptions() : this('[', ']', new SqlServer.Base.SqlServerBase(), false) { }
         /// <param name="identifierLeft">The left char to enclose a table or column name with.</param>
         /// <param name="identifierRight">The right char to enclose a table or column name with.</param>
         /// <param name="useParameters">Should all value be parameterized.</param>
-        public SqlOptions(char identifierLeft, char identifierRight, bool useParameters = true)
-            : this(identifierLeft, identifierRight, SqlLanguage.SqlServer, useParameters) { }
-        /// <param name="identifierLeft">The left char to enclose a table or column name with.</param>
-        /// <param name="identifierRight">The right char to enclose a table or column name with.</param>
-        /// <param name="sqlLanguage">The type of Sql to be generated.</param>
-        /// <param name="useParameters">Should all value be parameterized.</param>
-        public SqlOptions(char identifierLeft, char identifierRight, SqlLanguage sqlLanguage, bool useParameters = true)
+        public SqlOptions(char identifierLeft, char identifierRight, ISqlBase sqlBase, bool useParameters = true)
         {
             ItemIdCount = 0;
             IdentifierLeft = identifierLeft;
             IdentifierRight = identifierRight;
-            SqlLanguage = sqlLanguage;
+            SqlBase = sqlBase;
             UseParameters = useParameters;
             if (useParameters)
                 SqlItems = new List<SqlItem>();
@@ -92,84 +84,7 @@
         /// <param name="type">The C# type.</param>
         /// <param name="size">The size the sql type should have. Will be ignored if the <see cref="CSharpType"/> don't support it.</param>
         /// <param name="digits">Only used when the <see cref="CSharpType"/> is Decimal</param>
-        public virtual string CSharpTypeToSqlDataType(CSharpType type, uint size = 0, int digits = 0)
-        {
-            string data = "";
-            switch (type)
-            {
-                case CSharpType.Char:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "nchar(1)" : "CHAR(1)";
-                    break;
-                case CSharpType.String:
-                    if (SqlLanguage == SqlLanguage.SqlServer)
-                    {
-                        data = "nvarchar";
-                        data += size > 0 && size <= 4000 ? $"({size})" : "(max)";
-                    }
-                    else
-                    {
-                        if (size > 21844 && size <= 65535)
-                            data = "TEXT";
-                        else if (size > 65535 && size <= 16777215)
-                            data = "MEDIUMTEXT";
-                        else if (size == 0 || size > 16777215)
-                            data = "LONGTEXT";
-                        else
-                            data = $"VARCHAR({size})";
-                    }
-                    break;
-                case CSharpType.Bool:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "bit(1)" : "BIT(1)";
-                    break;
-                case CSharpType.Byte:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "tinyint" : "TINYINT UNSIGNED";
-                    break;
-                case CSharpType.Short:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "smallint" : "SMALLINT";
-                    break;
-                case CSharpType.Int:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "int" : "INT";
-                    break;
-                case CSharpType.Long:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "bigint" : "BIGINT";
-                    break;
-                case CSharpType.Decimal:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "decimal" : "DECIMAL";
-                    data += size <= 36 ? $"({size}," : "(18,";
-                    data += digits <= 36 ? $"{digits})" : "0)";
-                    break;
-                case CSharpType.Float:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "float" : "FLOAT";
-                    data += size <= 53 ? $"({size})" : "(53)";
-                    break;
-                case CSharpType.ByteArray:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "varbinary" : "VARBINARY";
-                    if (size > 0 || size <= 8000)
-                        data += $"({size})";
-                    else
-                        data += SqlLanguage == SqlLanguage.SqlServer ? "(max)" : "(65535)";
-                    break;
-                case CSharpType.DateTime:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "datetime2" : "DATETIME";
-                    break;
-                case CSharpType.SByte:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "tinyint" : "TINYINT SIGNED";
-                    break;
-                case CSharpType.UShort:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "smallint" : "SMALLINT UNSIGNED";
-                    break;
-                case CSharpType.UInt:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "int" : "INT UNSIGNED";
-                    break;
-                case CSharpType.ULong:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "bigint" : "BIGINT UNSIGNED";
-                    break;
-                case CSharpType.Guid:
-                    data = SqlLanguage == SqlLanguage.SqlServer ? "uniqueidentifier" : "BINARY(16)";
-                    break;
-            }
-            return data;
-        }
+        public virtual string CSharpTypeToSqlDataType(CSharpType type, uint size = 0, int digits = 0) => SqlBase.CSharpTypeToSqlDataType(type, size, digits);
         /// <summary>
         /// Add a value that should be parameterized, and returns a id.
         /// If this <see cref="SqlOptions"/>.UseParameters is false, when the value will be returned as a string.
@@ -191,46 +106,6 @@
         /// Returns a object that is ready for a sql query.
         /// </summary>
         /// <param name="obj">The object that should be made ready a sql query.</param>
-        protected virtual object HandleObject(object obj)
-        {
-            if (obj is bool)
-                obj = (bool)obj ? 1 : 0;
-            else if (obj is Guid guid)
-                if (SqlLanguage == SqlLanguage.SqlServer)
-                    obj = guid.ToString();
-                else
-                    obj = guid.ToByteArray();
-            else if (obj is DateTime dateTime)
-                obj = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            else if (obj is DateTimeOffset dateTimeOffset)
-                obj = dateTimeOffset.ToString("yyyy-MM-dd HH:mm:ss");
-            else if (SqlLanguage == SqlLanguage.SqlServer)
-            {
-                if (obj is sbyte)
-                    obj = unchecked((byte)obj);
-                else if (obj is ushort)
-                    obj = unchecked((short)obj);
-                else if (obj is uint)
-                    obj = unchecked((int)obj);
-                else if (obj is ulong)
-                    obj = unchecked((long)obj);
-            }
-            return obj;
-        }
-    }
-
-    /// <summary>
-    /// The supported Sql languages
-    /// </summary>
-    public enum SqlLanguage
-    {
-        /// <summary>
-        /// Microsoft Sql Server, also known as MS Sql
-        /// </summary>
-        SqlServer,
-        /// <summary>
-        /// Oracle's MySql
-        /// </summary>
-        MySql
+        protected virtual object HandleObject(object obj) => SqlBase.HandleObject(obj);
     }
 }
