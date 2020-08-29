@@ -1,7 +1,7 @@
 ﻿namespace Endahl.CSharpedSql.SqlServer
 {
     using System;
-    using System.Data.SqlClient;
+    using Microsoft.Data.SqlClient;
 
     /// <summary>
     /// Provides a way of reading a forward-only stream of rows from a Sql Server database.

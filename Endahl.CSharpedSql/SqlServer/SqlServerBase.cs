@@ -67,7 +67,14 @@
             if (column.AutoIncrement)
                 line += " IDENTITY(1,1)";
             else if (column.DefaultValue != null)
-                line += $" DEFAULT {sql.CreateItemID(column.DefaultValue)}";
+            {
+                line += $" DEFAULT ";
+                var obj = HandleObject(column.DefaultValue);
+                if (obj is string s)
+                    line += $"'{s}'";
+                else
+                    line += obj.ToString();
+            }
 
             return line;
         }
@@ -126,7 +133,7 @@
             {
                 CreateType.Table => "CREATE " + CreateTable(create, sql),
                 CreateType.TableIfNotExists =>
-                    $"IF(object_id(N'{sql.IdentifieName(create.TableName)}', N'U') IS NULL BEGIN CREATE TABLE {CreateTable(create, sql)}; END",
+                    $"IF (object_id(N'{sql.IdentifieName(create.TableName)}', N'U') IS NULL)\nBEGIN CREATE TABLE {CreateTable(create, sql)}\nEND",
                 CreateType.Copy => $"CREATE TABLE {sql.IdentifieName(create.TableName)} AS {create.Select.ToString(sql)}",
                 _ => "",
             };
@@ -191,7 +198,7 @@
                     data += size > 0 && size <= 4000 ? $"({size})" : "(max)";
                     break;
                 case CSharpType.Bool:
-                    data = "bit(1)";
+                    data = "bit";
                     break;
                 case CSharpType.Byte:
                     data = "tinyint";
@@ -207,12 +214,12 @@
                     break;
                 case CSharpType.Decimal:
                     data = "decimal";
-                    data += size <= 36 ? $"({size}," : "(18,";
-                    data += digits <= 36 ? $"{digits})" : "0)";
+                    data += size <= 36 && size != 0 ? $"({size}," : "(18,";
+                    data += digits <= 36 && digits > 0 ? $"{digits})" : "0)";
                     break;
                 case CSharpType.Float:
                     data = "float";
-                    data += size <= 53 ? $"({size})" : "(53)";
+                    data += size <= 53 && size != 0 ? $"({size})" : "(53)";
                     break;
                 case CSharpType.ByteArray:
                     data = "varbinary";
@@ -567,9 +574,9 @@
             else if (obj is Guid guid)
                 obj = guid.ToString();
             else if (obj is DateTime dateTime)
-                obj = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                obj = dateTime.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ', 'T');
             else if (obj is DateTimeOffset dateTimeOffset)
-                obj = dateTimeOffset.ToString("yyyy-MM-dd HH:mm:ss");
+                obj = dateTimeOffset.ToString("yyyy-MM-dd|HH:mm:ss").Replace('|', 'T');
             else if (obj is sbyte)
                 obj = unchecked((byte)obj);
             else if (obj is ushort)
@@ -578,6 +585,8 @@
                 obj = unchecked((int)obj);
             else if (obj is ulong)
                 obj = unchecked((long)obj);
+            //else if (obj is string s && (s == "0000-00-00" || s == "0000-00-00 00:00:00"))
+            //    obj = "0001-01-01T00:00:00";
             return obj;
         }
 

@@ -1,9 +1,9 @@
 ﻿namespace Endahl.CSharpedSql.SqlServer
 {
     using Endahl.CSharpedSql.Base;
+    using Microsoft.Data.SqlClient;
     using System.Collections.Generic;
     using System.Data;
-    using System.Data.SqlClient;
 
     public class SqlServerConnect : SqlConnect
     {
