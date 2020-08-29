@@ -76,8 +76,8 @@
         {
             return condition.ConditionType switch
             {
-                ConditionType.Between => $"{condition.Column.ToString(sql)} BETWEEN {sql.CreateItemID(condition.Item)} AND {sql.CreateItemID(condition.Item2)}",
-                ConditionType.NotBetween => $"{condition.Column.ToString(sql)} NOT BETWEEN {sql.CreateItemID(condition.Item)} AND {sql.CreateItemID(condition.Item2)}",
+                ConditionType.Between => $"{condition.Column.ToString(sql)} BETWEEN " + ConditionBetween(condition, sql),
+                ConditionType.NotBetween => $"{condition.Column.ToString(sql)} NOT BETWEEN " + ConditionBetween(condition, sql),
                 ConditionType.Equal => ConditionToString(condition, "=", sql),
                 ConditionType.NotEqual => ConditionToString(condition, "<>", sql),
                 ConditionType.GreaterThan => ConditionToString(condition, ">", sql),
@@ -94,10 +94,30 @@
                 _ => "",
             };
         }
+        private string ConditionBetween(Condition condition, SqlOptions sql)
+        {
+            string s;
+            if (condition.Item is ColumnName c)
+                s = c.ToString(sql);
+            else
+                s = sql.CreateItemID(condition.Item);
+            s += " AND ";
+            if (condition.Item2 is ColumnName c2)
+                s += c2.ToString(sql);
+            else
+                s += sql.CreateItemID(condition.Item2);
+            return s;
+        }
         private string ConditionToString(Condition condition, string conditionString, SqlOptions sql)
         {
             var result = condition.Column != null ? condition.Column.ToString(sql) : sql.CreateItemID(condition.Item);
-            return $"{result} {conditionString} {sql.CreateItemID(condition.Item2)}";
+            result += $" {conditionString} ";
+            if (condition.Item2 is ColumnName c)
+                result += c.ToString(sql);
+            else
+                result += sql.CreateItemID(condition.Item2);
+
+            return result;
         }
 
         public virtual string Create(Create create, SqlOptions sql)
