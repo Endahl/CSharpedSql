@@ -5,34 +5,11 @@
 
     public class QueryString : ISqlStatement
     {
-        protected virtual IDictionary<SqlLanguage, string> Querys { get; }
-
-        /// <summary>
-        /// Gets or Sets the MySql command
-        /// </summary>
-        public virtual string MySql
-        {
-            get => Querys.TryGetValue(SqlLanguage.MySql, out var statement) ? statement : null;
-            set
-            {
-                SqlString(SqlLanguage.MySql, value);
-            }
-        }
-        /// <summary>
-        /// Gets or Sets the Sql Server command
-        /// </summary>
-        public virtual string SqlServer
-        {
-            get => Querys.TryGetValue(SqlLanguage.SqlServer, out var statement) ? statement : null;
-            set
-            {
-                SqlString(SqlLanguage.SqlServer, value);
-            }
-        }
+        public virtual IDictionary<string, IList<string>> Querys { get; }
 
         public QueryString()
         {
-            Querys = new Dictionary<SqlLanguage, string>();
+            Querys = new Dictionary<string, IList<string>>();
         }
 
         /// <summary>
@@ -47,14 +24,7 @@
         /// </summary>
         public virtual string ToString(SqlOptions sql)
         {
-            if (Querys.ContainsKey(sql.SqlLanguage))
-                return Querys[sql.SqlLanguage];
-            return "";
-        }
-
-        protected virtual void SqlString(SqlLanguage language, string statement)
-        {
-            Querys.Add(language, statement);
+            return sql.SqlBase.QueryString(this, sql);
         }
     }
 }

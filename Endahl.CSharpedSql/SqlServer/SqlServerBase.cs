@@ -1,8 +1,8 @@
-﻿using System;
-using Endahl.CSharpedSql.Base;
-
-namespace Endahl.CSharpedSql.SqlServer.Base
+﻿namespace Endahl.CSharpedSql.SqlServer.Base
 {
+    using System;
+    using Endahl.CSharpedSql.Base;
+
     public class SqlServerBase : ISqlBase
     {
         public virtual string Alter(Alter alter, SqlOptions sql)
@@ -606,7 +606,7 @@ namespace Endahl.CSharpedSql.SqlServer.Base
             else
                 s = join.JoinType.ToString().ToUpper();
 
-            s += $" JOIN {sql.IdentifieName(join.TableName)} ON " +
+            s += $" JOIN {sql.IdentifieName(join.TableName2)} ON " +
                 $"{sql.IdentifieName(join.TableName)}.{sql.IdentifieName(join.Column)} = " +
                 $"{sql.IdentifieName(join.TableName2)}.{sql.IdentifieName(join.Column2)}";
 
@@ -631,6 +631,18 @@ namespace Endahl.CSharpedSql.SqlServer.Base
                     s += $", {orderBy.Columns[i].ToString(sql)}";
             }
             return s + $" {orderBy.OrderByType}";
+        }
+
+        public virtual string QueryString(QueryString queryString, SqlOptions sql)
+        {
+            var s = "";
+            if (queryString.Querys.TryGetValue(QueryStringExtensions.Key, out var querys))
+            {
+                foreach (var query in querys)
+                    s += query + ";";
+                s.Trim(';');
+            }
+            return s;
         }
 
         public virtual string Select(Select select, SqlOptions sql)
@@ -697,9 +709,11 @@ namespace Endahl.CSharpedSql.SqlServer.Base
         }
         private string ToStringWihtoutWhere(Where where, SqlOptions sql)
         {
-            var w = where.Condition.ToString(sql);
-            if (where is ParenthesesWhere)
-                w = $"({w})";
+            string w;
+            if (where is ParenthesesWhere pw)
+                w = $"({ToStringWihtoutWhere(pw.Where, sql)})";
+            else
+                w = where.Condition.ToString(sql);
 
             foreach (var wh in where.Wheres)
             {

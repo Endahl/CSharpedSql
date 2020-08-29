@@ -54,6 +54,11 @@
             The supported functions
             </summary>
         </member>
+        <member name="T:Endahl.CSharpedSql.Base.ISqlBase">
+            <summary>
+            The base of how sql should be returned as a string
+            </summary>
+        </member>
         <member name="M:Endahl.CSharpedSql.Base.ISqlStatement.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Returns the statement as a string.
@@ -86,25 +91,14 @@
             Get the right char used to enclose a table or column name with.
             </summary>
         </member>
-        <member name="P:Endahl.CSharpedSql.Base.SqlOptions.SqlLanguage">
-            <summary>
-            Get the type of Sql to be generated.
-            </summary>
-        </member>
         <member name="P:Endahl.CSharpedSql.Base.SqlOptions.UseParameters">
             <summary>
             Get an indication of whether all values will be parameterized.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.#ctor(System.Char,System.Char,System.Boolean)">
+        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.#ctor(System.Char,System.Char,Endahl.CSharpedSql.Base.ISqlBase,System.Boolean)">
             <param name="identifierLeft">The left char to enclose a table or column name with.</param>
             <param name="identifierRight">The right char to enclose a table or column name with.</param>
-            <param name="useParameters">Should all value be parameterized.</param>
-        </member>
-        <member name="M:Endahl.CSharpedSql.Base.SqlOptions.#ctor(System.Char,System.Char,Endahl.CSharpedSql.Base.SqlLanguage,System.Boolean)">
-            <param name="identifierLeft">The left char to enclose a table or column name with.</param>
-            <param name="identifierRight">The right char to enclose a table or column name with.</param>
-            <param name="sqlLanguage">The type of Sql to be generated.</param>
             <param name="useParameters">Should all value be parameterized.</param>
         </member>
         <member name="P:Endahl.CSharpedSql.Base.SqlOptions.GetSqlItems">
@@ -150,21 +144,6 @@
             Returns a object that is ready for a sql query.
             </summary>
             <param name="obj">The object that should be made ready a sql query.</param>
-        </member>
-        <member name="T:Endahl.CSharpedSql.Base.SqlLanguage">
-            <summary>
-            The supported Sql languages
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.Base.SqlLanguage.SqlServer">
-            <summary>
-            Microsoft Sql Server, also known as MS Sql
-            </summary>
-        </member>
-        <member name="F:Endahl.CSharpedSql.Base.SqlLanguage.MySql">
-            <summary>
-            Oracle's MySql
-            </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.Case.ToString">
             <summary>
@@ -1253,47 +1232,51 @@
             Return the <see cref="T:Endahl.CSharpedSql.Join"/> clause as a string. the string will be missing a table name.
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.ToString(System.String,Endahl.CSharpedSql.Base.SqlOptions)">
+        <member name="M:Endahl.CSharpedSql.Join.ToString(Endahl.CSharpedSql.Base.SqlOptions)">
             <summary>
             Return the <see cref="T:Endahl.CSharpedSql.Join"/> clause as a string
             </summary>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.Inner(System.String,System.String,System.String)">
+        <member name="M:Endahl.CSharpedSql.Join.Inner(System.String,System.String,System.String,System.String)">
             <summary>
             The INNER JOIN keyword selects records that have matching values in both tables.
             </summary>
+            <param name="table">the table to join with</param>
             <param name="table2">the table to join with</param>
-            <param name="columnFrom">the column from the table to join on</param>
-            <param name="column">the column from the table to join with</param>
+            <param name="column">the column from the table to join on</param>
+            <param name="column2">the column from the table to join with</param>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.Left(System.String,System.String,System.String)">
+        <member name="M:Endahl.CSharpedSql.Join.Left(System.String,System.String,System.String,System.String)">
             <summary>
             The LEFT JOIN keyword returns all records from the left table (table1),
             and the matched records from the right table (table2).
             The result is NULL from the right side, if there is no match.
             </summary>
+            <param name="table">the table to join with</param>
             <param name="table2">the table to join with</param>
-            <param name="columnFrom">the column from the table to join on</param>
-            <param name="column">the column from the table to join with</param>
+            <param name="column">the column from the table to join on</param>
+            <param name="column2">the column from the table to join with</param>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.Right(System.String,System.String,System.String)">
+        <member name="M:Endahl.CSharpedSql.Join.Right(System.String,System.String,System.String,System.String)">
             <summary>
             The RIGHT JOIN keyword returns all records from the right table (table2),
             and the matched records from the left table (table1).
             The result is NULL from the left side, when there is no match.
             </summary>
+            <param name="table">the table to join with</param>
             <param name="table2">the table to join with</param>
-            <param name="columnFrom">the column from the table to join on</param>
-            <param name="column">the column from the table to join with</param>
+            <param name="column">the column from the table to join on</param>
+            <param name="column2">the column from the table to join with</param>
         </member>
-        <member name="M:Endahl.CSharpedSql.Join.Full(System.String,System.String,System.String)">
+        <member name="M:Endahl.CSharpedSql.Join.Full(System.String,System.String,System.String,System.String)">
             <summary>
             he FULL OUTER JOIN keyword return all records when there is a match in either left (table1) or right (table2) table records.
             <para>Note: FULL OUTER JOIN can potentially return very large result-sets!</para>
             </summary>
+            <param name="table">the table to join with</param>
             <param name="table2">the table to join with</param>
-            <param name="columnFrom">the column from the table to join on</param>
-            <param name="column">the column from the table to join with</param>
+            <param name="column">the column from the table to join on</param>
+            <param name="column2">the column from the table to join with</param>
         </member>
         <member name="T:Endahl.CSharpedSql.MySql.MySql">
             <summary>
@@ -1303,6 +1286,11 @@
         <member name="P:Endahl.CSharpedSql.MySql.MySql.SqlOptions">
             <summary>
             Get the options for this <see cref="T:Endahl.CSharpedSql.MySql.MySql"/> instance.
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.MySql.QueryStringExtensions.AddMySql(Endahl.CSharpedSql.QueryString,System.String)">
+            <summary>
+            Add a custom MySql query string
             </summary>
         </member>
         <member name="M:Endahl.CSharpedSql.NewColumn.ToString">
@@ -1342,16 +1330,6 @@
             </summary>
             <param name="columnName">the column to order by</param>
         </member>
-        <member name="P:Endahl.CSharpedSql.QueryString.MySql">
-            <summary>
-            Gets or Sets the MySql command
-            </summary>
-        </member>
-        <member name="P:Endahl.CSharpedSql.QueryString.SqlServer">
-            <summary>
-            Gets or Sets the Sql Server command
-            </summary>
-        </member>
         <member name="M:Endahl.CSharpedSql.QueryString.ToString">
             <summary>
             Returns the <see cref="T:Endahl.CSharpedSql.QueryString"/> statement as a string.
@@ -1367,9 +1345,14 @@
             A SELECT statement for SQL.
             </summary>
         </member>
-        <member name="F:Endahl.CSharpedSql.Select.top">
+        <member name="P:Endahl.CSharpedSql.Select.Top">
             <summary>
             The limit of rows to find. Is only sets then the method <see cref="T:Endahl.CSharpedSql.Select"/>.TopFrom() is called.
+            </summary>
+        </member>
+        <member name="P:Endahl.CSharpedSql.Select.Offset">
+            <summary>
+            Specify which row to start retrieving data from. Is only sets then the method <see cref="T:Endahl.CSharpedSql.Select"/>.TopFrom() is called.
             </summary>
         </member>
         <member name="P:Endahl.CSharpedSql.Select.TableName">
@@ -1479,6 +1462,16 @@
             <para>In MySql this is the same as LIMIT.</para>
             </summary>
             <param name="top">the max number to return</param>
+            <param name="table">the table to select from</param>
+            <param name="columns">the columns to return</param>
+        </member>
+        <member name="M:Endahl.CSharpedSql.Select.TopFrom(System.Int32,System.Int32,System.String,Endahl.CSharpedSql.ColumnItem[])">
+            <summary>
+            The SELECT TOP clause is used to specify the number of records to return.
+            <para>In MySql this is the same as LIMIT.</para>
+            </summary>
+            <param name="top">the max number to return</param>
+            <param name="offset">Specify which row to start retrieving data from</param>
             <param name="table">the table to select from</param>
             <param name="columns">the columns to return</param>
         </member>
@@ -1640,6 +1633,11 @@
         <member name="P:Endahl.CSharpedSql.SqlItem.Value">
             <summary>
             The value of the id
+            </summary>
+        </member>
+        <member name="M:Endahl.CSharpedSql.SqlServer.QueryStringExtensions.AddSqlServer(Endahl.CSharpedSql.QueryString,System.String)">
+            <summary>
+            Add a custom Sql Server query string
             </summary>
         </member>
         <member name="T:Endahl.CSharpedSql.SqlServer.SqlServer">

@@ -2,11 +2,11 @@
 {
     public class ParenthesesWhere : Where
     {
-        public Where where;
+        public Where Where { get; }
 
         public ParenthesesWhere(Where where) : base(null)
         {
-            this.where = where;
+            Where = where;
         }
     }
 }

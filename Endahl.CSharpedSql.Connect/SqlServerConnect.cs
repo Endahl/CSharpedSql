@@ -37,7 +37,7 @@
             {
                 Connection = connection
             };
-            SqlOptions = new SqlOptions('[', ']', SqlLanguage.SqlServer);
+            SqlOptions = new SqlOptions('[', ']', new Base.SqlServerBase());
             connection.StateChange += (sender, e) =>
             {
                 if (StateChange != null)

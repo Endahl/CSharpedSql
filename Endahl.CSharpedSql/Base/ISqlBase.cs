@@ -18,6 +18,7 @@
         string Insert(Insert insert, SqlOptions sql);
         string Join(Join join, SqlOptions sql);
         string OrderBy(OrderBy orderBy, SqlOptions sql);
+        string QueryString(QueryString queryString, SqlOptions sql);
         string Select(Select select, SqlOptions sql);
         string Update(Update update, SqlOptions sql);
         string Where(Where where, SqlOptions sql);

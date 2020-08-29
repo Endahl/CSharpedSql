@@ -73,7 +73,7 @@ namespace Endahl.CSharpedSqlTests.SqlServer
             var expected = "SELECT [test].[hello], [test2].[name] FROM [test] LEFT JOIN [test2] ON [test].[id] = [test2].[name] WHERE [test].[id] = @item0 ORDER BY [test2].[name] ASC;";
 
             //act
-            sql.Query(Select.From("test", "test.hello", "test2.name") + Where.Equal("test.id", 2) + Join.Left("test2", "id", "name") + OrderBy.ASC("test2.name"));
+            sql.Query(Select.From("test", "test.hello", "test2.name") + Where.Equal("test.id", 2) + Join.Left("test", "id", "test2", "name") + OrderBy.ASC("test2.name"));
             var actual = sql.ToString().TrimEnd();
 
             //assert

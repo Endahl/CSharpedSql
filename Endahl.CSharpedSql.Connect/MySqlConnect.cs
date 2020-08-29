@@ -37,7 +37,7 @@
             {
                 Connection = connection
             };
-            SqlOptions = new SqlOptions('`', '`', SqlLanguage.MySql);
+            SqlOptions = new SqlOptions('`', '`', new Base.MySqlBase());
             connection.StateChange += (sender, e) =>
             {
                 if (StateChange != null)
