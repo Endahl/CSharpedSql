@@ -23,17 +23,11 @@
         /// <summary>
         /// Return the <see cref="OrderBy"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Return the <see cref="OrderBy"/> as a string.
         /// </summary>
-        public string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.OrderBy(this, sql);
-        }
+        public string ToString(SqlOptions sql) => sql.SqlBase.OrderBy(this, sql);
 
         /// <summary>
         /// Sortde ascending by the column
@@ -41,7 +35,7 @@
         /// <param name="columnName">the column to order by</param>
         public static OrderBy ASC(ColumnItem columnName, params ColumnItem[] columnNames)
         {
-            return new OrderBy(OrderByType.ASC, columnName, columnNames);
+            return new(OrderByType.ASC, columnName, columnNames);
         }
         /// <summary>
         /// Sortde descending by the column
@@ -49,7 +43,7 @@
         /// <param name="columnName">the column to order by</param>
         public static OrderBy DESC(ColumnItem columnName, params ColumnItem[] columnNames)
         {
-            return new OrderBy(OrderByType.DESC, columnName, columnNames);
+            return new(OrderByType.DESC, columnName, columnNames);
         }
     }
 }

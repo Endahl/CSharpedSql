@@ -101,7 +101,7 @@
                 _ => "",
             };
         }
-        private string ConditionBetween(Condition condition, SqlOptions sql)
+        private static string ConditionBetween(Condition condition, SqlOptions sql)
         {
             string s;
             if (condition.Item is ColumnName c)
@@ -115,7 +115,7 @@
                 s += sql.CreateItemID(condition.Item2);
             return s;
         }
-        private string ConditionToString(Condition condition, string conditionString, SqlOptions sql)
+        private static string ConditionToString(Condition condition, string conditionString, SqlOptions sql)
         {
             var result = condition.Column != null ? condition.Column.ToString(sql) : sql.CreateItemID(condition.Item);
             result += $" {conditionString} ";
@@ -172,7 +172,7 @@
             }
             return statement + ')';
         }
-        private void AddConstraint(Create create, Column item)
+        private static void AddConstraint(Create create, Column item)
         {
             if (item.Constraint != null)
             {
@@ -594,7 +594,7 @@
         {
             return "HAVING " + ToStringWihtoutWhere(having, sql);
         }
-        private string ToStringWihtoutWhere(Having having, SqlOptions sql)
+        private static string ToStringWihtoutWhere(Having having, SqlOptions sql)
         {
             var ha = having.Condition.ToString(sql);
 
@@ -669,7 +669,7 @@
             {
                 foreach (var query in querys)
                     s += query + ";";
-                s.Trim(';');
+                return s.Trim(';');
             }
             return s;
         }
@@ -736,7 +736,7 @@
         {
             return "WHERE " + ToStringWihtoutWhere(where, sql);
         }
-        private string ToStringWihtoutWhere(Where where, SqlOptions sql)
+        private static string ToStringWihtoutWhere(Where where, SqlOptions sql)
         {
             string w;
             if (where is ParenthesesWhere pw)

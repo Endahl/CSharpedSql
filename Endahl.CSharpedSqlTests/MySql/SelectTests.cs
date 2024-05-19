@@ -9,7 +9,7 @@ namespace Endahl.CSharpedSqlTests.MySql
         public void Select_All_From()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test`;";
 
             //act
@@ -17,14 +17,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Select_Top_All_From()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` LIMIT 3;";
 
             //act
@@ -32,14 +32,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Select_Distinct_All_From()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT DISTINCT * FROM `test`;";
 
             //act
@@ -47,14 +47,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Select_SomeColumns_From()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `hello`, `name` FROM `test`;";
 
             //act
@@ -62,14 +62,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Select_From_Where_OrderBy_Join()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `test`.`hello`, `test2`.`name` FROM `test` LEFT JOIN `test2` ON `test`.`id` = `test2`.`name` WHERE `test`.`id` = @item0 ORDER BY `test2`.`name` ASC;";
 
             //act
@@ -77,14 +77,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Select_Multi_Wheres()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `hello`, `name` FROM `test` WHERE `id` = @item0 AND `name` = @item1 OR `cp` = @item2;";
 
             //act
@@ -95,7 +95,7 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

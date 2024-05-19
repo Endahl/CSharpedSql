@@ -20,17 +20,11 @@
         /// <summary>
         /// Return the <see cref="Insert"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Return the <see cref="Insert"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Insert(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Insert(this, sql);
 
         /// <summary>
         /// The INSERT INTO statement is used to insert new records in a table.
@@ -39,7 +33,7 @@
         /// <param name="values">the values to insert</param>
         public static Insert Into(string table, params ColumnValue[] values)
         {
-            return new Insert(table, values);
+            return new(table, values);
         }
     }
 }

@@ -27,17 +27,11 @@
         /// <summary>
         /// Return the <see cref="Update"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Return the <see cref="Update"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Update(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Update(this, sql);
 
         /// <summary>
         /// The WHERE clause is used to filter records.
@@ -83,7 +77,7 @@
         /// <param name="values">the values to update with</param>
         public static Update Set(string table, params ColumnValue[] values)
         {
-            return new Update(table, values);
+            return new(table, values);
         }
     }
 }

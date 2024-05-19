@@ -19,17 +19,11 @@
         /// <summary>
         /// Returns the <see cref="Drop"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Drop"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Drop(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Drop(this, sql);
 
         /// <summary>
         /// Delete a table and all information in it from the database
@@ -39,7 +33,7 @@
         /// <returns></returns>
         public static Drop Table(string table)
         {
-            return new Drop(table, false);
+            return new(table, false);
         }
 
         /// <summary>
@@ -50,7 +44,7 @@
         /// <returns></returns>
         public static Drop TableIfExists(string table)
         {
-            return new Drop(table, true);
+            return new(table, true);
         }
     }
 }

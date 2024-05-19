@@ -9,7 +9,7 @@ namespace Endahl.CSharpedSqlTests.MySql
         public void Join_Inner()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `test`.`id` FROM `test` INNER JOIN `test2` ON `test`.`id` = `test2`.`name`;";
 
             //act
@@ -17,14 +17,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Join_Left()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `test`.`id` FROM `test` LEFT JOIN `test2` ON `test`.`id` = `test2`.`name`;";
 
             //act
@@ -32,14 +32,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Join_Right()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `test`.`id` FROM `test` RIGHT JOIN `test2` ON `test`.`id` = `test2`.`name`;";
 
             //act
@@ -47,14 +47,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Join_Full()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT `test`.`id` FROM `test` FULL OUTER JOIN `test2` ON `test`.`id` = `test2`.`name`;";
 
             //act
@@ -62,7 +62,7 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

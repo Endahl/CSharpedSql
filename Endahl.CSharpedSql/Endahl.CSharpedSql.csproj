@@ -1,13 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Anders Endahl</Authors>
     <Product>CSharped Sql</Product>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>D:\Visual Studio\Endahl.CSharpedSql\Endahl.CSharpedSql\Endahl.CSharpedSql.xml</DocumentationFile>
   </PropertyGroup>
-
 </Project>

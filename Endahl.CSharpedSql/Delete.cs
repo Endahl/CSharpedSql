@@ -30,18 +30,12 @@
         /// <summary>
         /// Return the <see cref="Delete"/> statment as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
 
         /// <summary>
         /// Return the <see cref="Delete"/> statment as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Delete(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Delete(this, sql);
 
         /// <summary>
         /// The WHERE clause is used to filter records.
@@ -101,7 +95,7 @@
         /// <param name="table">the table to delete from</param>
         public static Delete From(string table)
         {
-            return new Delete(table);
+            return new(table);
         }
     }
 }

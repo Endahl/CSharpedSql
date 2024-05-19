@@ -60,61 +60,55 @@
         /// <summary>
         /// Returns the <see cref="Alter"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Alter"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Alter(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Alter(this, sql);
 
         public static Alter AddColumn(string table, NewColumn column)
         {
-            return new Alter(AlterType.Add, table, WhatToAlter.Column, column);
+            return new(AlterType.Add, table, WhatToAlter.Column, column);
         }
 
         public static Alter DropColumn(string table, string column)
         {
-            return new Alter(AlterType.Drop, "", table, WhatToAlter.Column, column);
+            return new(AlterType.Drop, "", table, WhatToAlter.Column, column);
         }
 
         public static Alter AlterColumn(string table, string column, CSharpType dataType, uint size = 0, int digits = 0)
         {
-            return new Alter(AlterType.Alter, table, WhatToAlter.Column, column, dataType, size, digits);
+            return new(AlterType.Alter, table, WhatToAlter.Column, column, dataType, size, digits);
         }
 
         public static Alter AddPrimaryKey(string table, string column, params string[] columns)
         {
-            return new Alter(AlterType.Add, $"pk_{table}", table, WhatToAlter.PrimaryKey, column, columns);
+            return new(AlterType.Add, $"pk_{table}", table, WhatToAlter.PrimaryKey, column, columns);
         }
 
         public static Alter AddForeignKey(string table, string column, string referencesTable, string referencesColumn)
         {
-            return new Alter(AlterType.Add, $"fk_{table}_{column}", table, WhatToAlter.ForeignKey, column, referencesTable, referencesColumn);
+            return new(AlterType.Add, $"fk_{table}_{column}", table, WhatToAlter.ForeignKey, column, referencesTable, referencesColumn);
         }
 
         public static Alter AddUnique(string table, string column)
         {
-            return new Alter(AlterType.Add, $"uc_{table}_{column}", table, WhatToAlter.Unique, column);
+            return new(AlterType.Add, $"uc_{table}_{column}", table, WhatToAlter.Unique, column);
         }
 
         public static Alter DropPrimaryKey(string table)
         {
-            return new Alter(AlterType.Drop, $"pk_{table}", table, WhatToAlter.PrimaryKey, "");
+            return new(AlterType.Drop, $"pk_{table}", table, WhatToAlter.PrimaryKey, "");
         }
 
         public static Alter DropForeignKey(string table, string column)
         {
-            return new Alter(AlterType.Drop, $"fk_{table}_{column}", table, WhatToAlter.ForeignKey, column);
+            return new(AlterType.Drop, $"fk_{table}_{column}", table, WhatToAlter.ForeignKey, column);
         }
 
         public static Alter DropUnique(string table, string column)
         {
-            return new Alter(AlterType.Drop, $"uc_{table}_{column}", table, WhatToAlter.Unique, column);
+            return new(AlterType.Drop, $"uc_{table}_{column}", table, WhatToAlter.Unique, column);
         }
     }
 }

@@ -11,13 +11,7 @@
             Name = name;
         }
 
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.IdentifieName(Name);
-        }
+        public override string ToString() => ToString(new SqlOptions());
+        public virtual string ToString(SqlOptions sql) => sql.IdentifieName(Name);
     }
 }

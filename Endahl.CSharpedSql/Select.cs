@@ -65,17 +65,11 @@
         /// <summary>
         /// Returns the <see cref="Select"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Select"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Select(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Select(this, sql);
 
         /// <summary>
         /// The WHERE clause is used to filter records.

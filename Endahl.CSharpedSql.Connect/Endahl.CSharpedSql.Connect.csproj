@@ -1,22 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Anders Endahl</Authors>
     <Product>CSharped Sql Connect</Product>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>D:\Visual Studio\Endahl.CSharpedSql\Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.Connect.xml</DocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="2.0.1" />
-    <PackageReference Include="MySqlConnector" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
+    <PackageReference Include="MySqlConnector" Version="2.3.7" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Endahl.CSharpedSql\Endahl.CSharpedSql.csproj" />
   </ItemGroup>
-
 </Project>

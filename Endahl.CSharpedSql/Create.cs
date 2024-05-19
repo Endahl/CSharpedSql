@@ -28,7 +28,7 @@
             Primarys = new List<Column>();
             Foreigns = new List<Column>();
             Uniques = new List<Column>();
-            Columns = new List<Column>();
+            Columns = [];
         }
 
         protected Create(CreateType type, string name, Column column, IEnumerable<Column> columns) : this(type, name)
@@ -44,11 +44,7 @@
             Select = select;
         }
 
-        public IEnumerable<Column> GetColumns()
-        {
-            return Columns;
-
-        }
+        public IEnumerable<Column> GetColumns() => Columns;
 
         public Create AddColumn(Column column)
         {
@@ -59,17 +55,11 @@
         /// <summary>
         /// Returns the <see cref="Create"/> statement as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Create"/> statement as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Create(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Create(this, sql);
 
         /// <summary>
         /// 
@@ -78,12 +68,12 @@
         /// <param name="column">the column to add to the new table</param>
         public static Create Table(string tableName, Column column, params Column[] columns)
         {
-            return new Create(CreateType.Table, tableName, column, columns);
+            return new(CreateType.Table, tableName, column, columns);
         }
 
         public static Create TableIfNotExists(string tableName, Column column, params Column[] columns)
         {
-            return new Create(CreateType.TableIfNotExists, tableName, column, columns);
+            return new(CreateType.TableIfNotExists, tableName, column, columns);
         }
 
         /// <summary>
@@ -93,7 +83,7 @@
         /// <param name="fromTable"></param>
         public static Create CopyFrom(string newTableName, Select fromTable)
         {
-            return new Create(CreateType.Copy, newTableName, fromTable);
+            return new(CreateType.Copy, newTableName, fromTable);
         }
     }
 

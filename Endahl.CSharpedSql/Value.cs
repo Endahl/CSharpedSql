@@ -38,16 +38,10 @@
         /// <summary>
         /// Returns the <see cref="Value"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Value"/> as a string.
         /// </summary>
-        public override string ToString(SqlOptions sql)
-        {
-            return sql.CreateItemID(Object);
-        }
+        public override string ToString(SqlOptions sql) => sql.CreateItemID(Object);
     }
 }

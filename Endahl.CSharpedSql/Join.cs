@@ -34,18 +34,12 @@
         /// <summary>
         /// Return the <see cref="Join"/> clause as a string. the string will be missing a table name.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
 
         /// <summary>
         /// Return the <see cref="Join"/> clause as a string
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Join(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Join(this, sql);
 
         /// <summary>
         /// The INNER JOIN keyword selects records that have matching values in both tables.
@@ -56,7 +50,7 @@
         /// <param name="column2">the column from the table to join with</param>
         public static Join Inner(string table, string column, string table2, string column2)
         {
-            return new Join(JoinType.Inner, table, column, table2, column2);
+            return new(JoinType.Inner, table, column, table2, column2);
         }
 
         /// <summary>
@@ -70,7 +64,7 @@
         /// <param name="column2">the column from the table to join with</param>
         public static Join Left(string table, string column, string table2, string column2)
         {
-            return new Join(JoinType.Left, table, column, table2, column2);
+            return new(JoinType.Left, table, column, table2, column2);
         }
 
         /// <summary>
@@ -84,7 +78,7 @@
         /// <param name="column2">the column from the table to join with</param>
         public static Join Right(string table, string column, string table2, string column2)
         {
-            return new Join(JoinType.Right, table, column, table2, column2);
+            return new(JoinType.Right, table, column, table2, column2);
         }
 
         /// <summary>
@@ -97,7 +91,7 @@
         /// <param name="column2">the column from the table to join with</param>
         public static Join Full(string table, string column, string table2, string column2)
         {
-            return new Join(JoinType.FullOuter, table, column, table2, column2);
+            return new(JoinType.FullOuter, table, column, table2, column2);
         }
     }
 }

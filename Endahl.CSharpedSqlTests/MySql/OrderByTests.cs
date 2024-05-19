@@ -9,7 +9,7 @@ namespace Endahl.CSharpedSqlTests.MySql
         public void OrderBy_ASC()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` ORDER BY `id` ASC;";
 
             //act
@@ -17,14 +17,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void OrderBy_DESC()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` ORDER BY `id` DESC;";
 
             //act
@@ -32,14 +32,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void OrderBy_MultiColumns()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` ORDER BY `id`, `name`, `user` ASC;";
 
             //act
@@ -47,7 +47,7 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

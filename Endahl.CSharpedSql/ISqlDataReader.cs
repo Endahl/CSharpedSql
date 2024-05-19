@@ -1,6 +1,7 @@
 ﻿namespace Endahl.CSharpedSql
 {
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// A Interface that provides a way of reading a forward-only stream of rows from a Sql database.
@@ -11,6 +12,10 @@
         /// Closes the <see cref="ISqlDataReader"/> object.
         /// </summary>
         void Close();
+        /// <summary>
+        /// Asynchronously closes the <see cref="ISqlDataReader"/> object.
+        /// </summary>
+        Task CloseAsync();
         /// <summary>
         /// Gets the number of columns in the current row.
         /// </summary>
@@ -29,10 +34,20 @@
         /// </summary>
         bool NextResult();
         /// <summary>
+        /// Asynchronously advances the <see cref="ISqlDataReader"/> to the next result, when reading the results of batch
+        /// SQL statements.
+        /// </summary>
+        Task<bool> NextResultAsync();
+        /// <summary>
         /// Advances the <see cref="ISqlDataReader"/> to the next record.
         /// </summary>
         /// <returns></returns>
         bool Read();
+        /// <summary>
+        /// Asynchronously advances the <see cref="ISqlDataReader"/> to the next record.
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> ReadAsync();
         /// <summary>
         /// Gets the number of rows changed, inserted, or deleted by execution of the SQL statement.
         /// </summary>

@@ -9,7 +9,7 @@ namespace Endahl.CSharpedSqlTests.MySql
         public void Where_Equal()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` = @item0;";
 
             //act
@@ -17,14 +17,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_All()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` = ALL (SELECT * FROM `table`);";
 
             //act
@@ -32,14 +32,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Any()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` = ANY (SELECT * FROM `table`);";
 
             //act
@@ -47,14 +47,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_GreaterThan()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` > @item0;";
 
             //act
@@ -62,14 +62,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_LessThan()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` < @item0;";
 
             //act
@@ -77,14 +77,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_NotEqual()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` <> @item0;";
 
             //act
@@ -92,14 +92,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Between()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` BETWEEN @item0 AND @item1;";
 
             //act
@@ -107,14 +107,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_NotBetween()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` NOT BETWEEN @item0 AND @item1;";
 
             //act
@@ -122,14 +122,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Exists()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE EXISTS (SELECT `id` FROM `user` WHERE `id` = @item0);";
 
             //act
@@ -137,14 +137,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_NotExists()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE NOT EXISTS (SELECT `id` FROM `user` WHERE `id` = @item0);";
 
             //act
@@ -152,14 +152,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Like()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` LIKE @item0;";
 
             //act
@@ -167,14 +167,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_And_Where()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` = @item0 AND `name` <> @item1;";
 
             //act
@@ -182,14 +182,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Or_Where()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE `id` = @item0 OR `name` <> @item1;";
 
             //act
@@ -197,14 +197,14 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
         public void Where_Parentheses()
         {
             //arrange
-            SqlConnect sql = new CSharpedSql.MySql.MySqlConnect();
+            var sql = new CSharpedSql.MySql.MySqlConnect();
             var expected = "SELECT * FROM `test` WHERE (`id` = @item0 OR `pas` = @item1) AND `name` <> @item2;";
 
             //act
@@ -212,7 +212,7 @@ namespace Endahl.CSharpedSqlTests.MySql
             var actual = sql.ToString().TrimEnd();
 
             //assert
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }

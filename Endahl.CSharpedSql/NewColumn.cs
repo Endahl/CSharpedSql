@@ -23,16 +23,10 @@
         /// <summary>
         /// Returns the <see cref="NewColumn"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return sqlTypeItem.ToString();
-        }
+        public override string ToString() => sqlTypeItem.ToString();
         /// <summary>
         /// Returns the <see cref="NewColumn"/> as a string.
         /// </summary>
-        public string ToString(SqlOptions sql)
-        {
-            return sqlTypeItem.ToString(sql);
-        }
+        public string ToString(SqlOptions sql) => sqlTypeItem.ToString(sql);
     }
 }

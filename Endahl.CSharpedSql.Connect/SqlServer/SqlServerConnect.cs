@@ -4,6 +4,7 @@
     using Microsoft.Data.SqlClient;
     using System.Collections.Generic;
     using System.Data;
+    using System.Threading.Tasks;
 
     public class SqlServerConnect : SqlConnect
     {
@@ -38,11 +39,7 @@
                 Connection = connection
             };
             SqlOptions = new SqlOptions('[', ']', new Base.SqlServerBase());
-            connection.StateChange += (sender, e) =>
-            {
-                if (StateChange != null)
-                    StateChange.Invoke(sender, e);
-            };
+            connection.StateChange += (sender, e) => StateChange?.Invoke(sender, e);
         }
         public SqlServerConnect(string server, string database, string user, string password) : this()
         {
@@ -72,6 +69,17 @@
             return affected;
         }
         /// <summary>
+        /// Asynchronously executes a parameterized SQL statement and returns the number of rows affected.
+        /// </summary>
+        /// <returns>Number of rows affected</returns>
+        public override async Task<int> ExecuteAsync()
+        {
+            command.CommandText = base.ToString();
+            AddParameters(SqlOptions.GetSqlItems);
+            var affected = await command.ExecuteNonQueryAsync();
+            return affected;
+        }
+        /// <summary>
         /// Executes a parameterized SQL statement and builds a <see cref="ISqlDataReader"/>
         /// </summary>
         /// <returns>A <see cref="ISqlDataReader"/> object</returns>
@@ -80,6 +88,17 @@
             command.CommandText = base.ToString();
             AddParameters(SqlOptions.GetSqlItems);
             var reader = new SqlServerReader(command.ExecuteReader());
+            return reader;
+        }
+        /// <summary>
+        /// Asynchronously executes a parameterized SQL statement and builds a <see cref="ISqlDataReader"/>
+        /// </summary>
+        /// <returns>A <see cref="ISqlDataReader"/> object</returns>
+        public override async Task<ISqlDataReader> ExecuteReaderAsync()
+        {
+            command.CommandText = base.ToString();
+            AddParameters(SqlOptions.GetSqlItems);
+            var reader = new SqlServerReader(await command.ExecuteReaderAsync());
             return reader;
         }
         /// <summary>
@@ -95,12 +114,32 @@
             return result;
         }
         /// <summary>
-        ///  Opens a database connection with the property settings specified by the ConnectionString.
+        /// Asynchronously executes a parameterized SQL statement, and returns the first column of the first row in the result
+        /// set returned by the query. Extra columns or rows are ignored.
+        /// </summary>
+        /// <returns>The first column of the first row in the result set, or a null reference if the result set is empty</returns>
+        public override async Task<object> ExecuteScalarAsync()
+        {
+            command.CommandText = base.ToString();
+            AddParameters(SqlOptions.GetSqlItems);
+            var result = await command.ExecuteScalarAsync();
+            return result;
+        }
+        /// <summary>
+        /// Opens a database connection with the property settings specified by the ConnectionString.
         /// </summary>
         public override void OpenConnection()
         {
             if (connection.State != ConnectionState.Open)
                 connection.Open();
+        }
+        /// <summary>
+        /// Asynchronously opens a database connection with the property settings specified by the ConnectionString.
+        /// </summary>
+        public override async Task OpenConnectionAsync()
+        {
+            if (connection.State != ConnectionState.Open)
+                await connection.OpenAsync();
         }
         /// <summary>
         /// Closes the connection to the database. This is the preferred method of closing
@@ -110,6 +149,15 @@
         {
             if (connection.State != ConnectionState.Closed)
                 connection.Close();
+        }
+        /// <summary>
+        /// Asynchronously closes the connection to the database. This is the preferred method of closing
+        /// any open connection.
+        /// </summary>
+        public override async Task CloseConnectionAsync()
+        {
+            if (connection.State != ConnectionState.Closed)
+                await connection.CloseAsync();
         }
         /// <summary>
         /// Remove all quries from this <see cref="SqlServerConnect"/> instance.

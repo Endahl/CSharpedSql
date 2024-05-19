@@ -29,16 +29,10 @@
         /// <summary>
         /// Returns the <see cref="Column"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Column"/> as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Column(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Column(this, sql);
     }
 }

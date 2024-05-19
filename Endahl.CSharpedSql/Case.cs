@@ -22,22 +22,15 @@
         /// <summary>
         /// Returns the <see cref="Case"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="Case"/> as a string.
         /// </summary>
-        public override string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Case(this, sql);
-        }
+        public override string ToString(SqlOptions sql) => sql.SqlBase.Case(this, sql);
 
         public virtual Case ElseIf(Condition condition, object result)
         {
-            if (condition == null)
-                throw new System.ArgumentNullException("condition");
+            System.ArgumentNullException.ThrowIfNull(condition);
             Whens.Add(new Case(condition, result));
             return this;
         }
@@ -62,8 +55,7 @@
 
         public static Case IF(Condition condition, object result)
         {
-            if (condition == null)
-                throw new System.ArgumentNullException("condition");
+            System.ArgumentNullException.ThrowIfNull(condition);
             return new Case(condition, result);
         }
     }

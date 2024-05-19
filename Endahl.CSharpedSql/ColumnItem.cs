@@ -22,10 +22,7 @@
         /// <summary>
         /// Returns the <see cref="ColumnItem"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
         /// <summary>
         /// Returns the <see cref="ColumnItem"/> as a string.
         /// </summary>
@@ -39,7 +36,7 @@
         // allow the class to be created like a String. Example ( ColumnItem item = "test"; )
         public static implicit operator ColumnItem(string name)
         {
-            return new ColumnItem(name);
+            return new(name);
         }
     }
 }

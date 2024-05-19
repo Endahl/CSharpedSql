@@ -29,8 +29,7 @@
         /// <param name="where">The WHERE Clause to add</param>
         public virtual Where And(Where where)
         {
-            if (where == null)
-                throw new System.ArgumentNullException();
+            System.ArgumentNullException.ThrowIfNull(where);
             Wheres.Add(where);
             return this;
         }
@@ -41,8 +40,7 @@
         /// <param name="where">The WHERE Clause to add</param>
         public virtual Where Or(Where where)
         {
-            if (where == null)
-                throw new System.ArgumentNullException();
+            System.ArgumentNullException.ThrowIfNull(where);
             where.IsAnd = false;
             Wheres.Add(where);
             return this;
@@ -51,18 +49,12 @@
         /// <summary>
         /// Return the <see cref="Where"/> clause as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
 
         /// <summary>
         /// Return the <see cref="Where"/> clause as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.Where(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.Where(this, sql);
 
         /// <summary>
         /// Add a another condition to the WHERE Clause that need to be true. this is same as using 'And()'
@@ -102,7 +94,7 @@
         /// <param name="end">the end value</param>
         public static Where Between(string column, object start, object end)
         {
-            return new Where(Condition.Between(column, start, end));
+            return new(Condition.Between(column, start, end));
         }
 
         /// <summary>
@@ -113,7 +105,7 @@
         /// <param name="end">the end value</param>
         public static Where NotBetween(string column, object start, object end)
         {
-            return new Where(Condition.NotBetween(column, start, end));
+            return new(Condition.NotBetween(column, start, end));
         }
 
         /// <summary>
@@ -123,7 +115,7 @@
         /// <param name="value">the value the column should be</param>
         public static Where Equal(string column, object value)
         {
-            return new Where(Condition.Equal(column, value));
+            return new(Condition.Equal(column, value));
         }
 
         /// <summary>
@@ -133,7 +125,7 @@
         /// <param name="value">the value the column should not be</param>
         public static Where NotEqual(string column, object value)
         {
-            return new Where(Condition.NotEqual(column, value));
+            return new(Condition.NotEqual(column, value));
         }
 
         /// <summary>
@@ -143,7 +135,7 @@
         /// <param name="value">the value the column should be greater than</param>
         public static Where GreaterThan(string column, object value)
         {
-            return new Where(Condition.GreaterThan(column, value));
+            return new(Condition.GreaterThan(column, value));
         }
 
         /// <summary>
@@ -153,7 +145,7 @@
         /// <param name="value">the value the column should be less than</param>
         public static Where LessThan(string column, object value)
         {
-            return new Where(Condition.LessThan(column, value));
+            return new(Condition.LessThan(column, value));
         }
 
         /// <summary>
@@ -163,7 +155,7 @@
         /// <param name="value">the value to search with</param>
         public static Where Like(string column, object value)
         {
-            return new Where(Condition.Like(column, value));
+            return new(Condition.Like(column, value));
         }
 
         /// <summary>
@@ -172,7 +164,7 @@
         /// <param name="column">the column to look at</param>
         public static Where IsNull(string column)
         {
-            return new Where(Condition.IsNull(column));
+            return new(Condition.IsNull(column));
         }
 
         /// <summary>
@@ -181,7 +173,7 @@
         /// <param name="column">the column to look at</param>
         public static Where IsNotNull(string column)
         {
-            return new Where(Condition.IsNotNull(column));
+            return new(Condition.IsNotNull(column));
         }
 
         /// <summary>
@@ -191,7 +183,7 @@
         /// <param name="select">the SELECT statement to check on</param>
         public static Where Exists(Select select)
         {
-            return new Where(Condition.Exists(select));
+            return new(Condition.Exists(select));
         }
 
         /// <summary>
@@ -201,7 +193,7 @@
         /// <param name="select">the SELECT statement to check on</param>
         public static Where NotExists(Select select)
         {
-            return new Where(Condition.NotExists(select));
+            return new(Condition.NotExists(select));
         }
 
         /// <summary>
@@ -211,7 +203,7 @@
         /// <param name="select">the SELECT statement to check on</param>
         public static Where Any(string column, Select select)
         {
-            return new Where(Condition.Any(column, select));
+            return new(Condition.Any(column, select));
         }
 
         /// <summary>
@@ -221,17 +213,17 @@
         /// <param name="select">the SELECT statement to check on</param>
         public static Where All(string column, Select select)
         {
-            return new Where(Condition.All(column, select));
+            return new(Condition.All(column, select));
         }
 
         public static Where In(string coulmn, Select select)
         {
-            return new Where(Condition.In(coulmn, select));
+            return new(Condition.In(coulmn, select));
         }
 
         public static Where NotIn(string coulmn, Select select)
         {
-            return new Where(Condition.NotIn(coulmn, select));
+            return new(Condition.NotIn(coulmn, select));
         }
 
         /// <summary>

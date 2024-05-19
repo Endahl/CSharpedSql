@@ -22,17 +22,17 @@
 
         public static Constraint PrimaryKey()
         {
-            return new Constraint(ConstraintKey.PrimaryKey);
+            return new(ConstraintKey.PrimaryKey);
         }
 
         public static Constraint ForeignKey(string table, string column)
         {
-            return new Constraint(ConstraintKey.ForeignKey, table, column);
+            return new(ConstraintKey.ForeignKey, table, column);
         }
 
         public static Constraint Unique()
         {
-            return new Constraint(ConstraintKey.Unique);
+            return new(ConstraintKey.Unique);
         }
     }
 }

@@ -19,21 +19,15 @@
         /// <summary>
         /// Returns the <see cref="GroupBy"/> as a string.
         /// </summary>
-        public override string ToString()
-        {
-            return ToString(new SqlOptions());
-        }
+        public override string ToString() => ToString(new SqlOptions());
         /// <summary>
         /// Returns the <see cref="GroupBy"/> as a string.
         /// </summary>
-        public virtual string ToString(SqlOptions sql)
-        {
-            return sql.SqlBase.GroupBy(this, sql);
-        }
+        public virtual string ToString(SqlOptions sql) => sql.SqlBase.GroupBy(this, sql);
 
         public static GroupBy Column(string columnName, params string[] columnNames)
         {
-            return new GroupBy(columnName, columnNames);
+            return new(columnName, columnNames);
         }
     }
 }
