@@ -1,7 +1,6 @@
 ﻿namespace Endahl.CSharpedSql.SqlServer
 {
     using System;
-    using Endahl.CSharpedSql.MySql;
     using System.Threading.Tasks;
     using Microsoft.Data.SqlClient;
 

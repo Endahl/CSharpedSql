@@ -8,10 +8,12 @@
     <DocumentationFile>D:\Visual Studio\Endahl.CSharpedSql\Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.Connect.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.0" />
     <PackageReference Include="MySqlConnector" Version="2.3.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Endahl.CSharpedSql\Endahl.CSharpedSql.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServer\" />
   </ItemGroup>
 </Project>
