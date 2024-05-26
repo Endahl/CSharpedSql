@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSql", "Endahl.CSharpedSql\Endahl.CSharpedSql.csproj", "{9DE96A95-3945-4A24-A54E-734B82E468E6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSql.MySql", "Endahl.CSharpedSql.Connect\Endahl.CSharpedSql.MySql.csproj", "{C647E686-5D28-418B-94AF-BD57F5DB2B86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSql.MySql", "Endahl.CSharpedSql.MySql\Endahl.CSharpedSql.MySql.csproj", "{C647E686-5D28-418B-94AF-BD57F5DB2B86}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Endahl.CSharpedSqlTests", "Endahl.CSharpedSqlTests\Endahl.CSharpedSqlTests.csproj", "{47915724-8471-428F-BF30-ADE9DE69C5E4}"
 EndProject
